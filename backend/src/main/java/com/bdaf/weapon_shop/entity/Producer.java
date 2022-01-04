@@ -1,10 +1,14 @@
 package com.bdaf.weapon_shop.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "ws_producer")
 public class Producer {
@@ -23,6 +27,6 @@ public class Producer {
     @Column(name = "company_name", length = 63, nullable = false)
     private String companyName;
 
-    @Column(name = "nip", length = 15, nullable = false)
+    @Column(name = "nip", length = 15, nullable = false, unique = true)
     private String nip;
 }

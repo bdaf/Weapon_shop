@@ -1,10 +1,14 @@
 package com.bdaf.weapon_shop.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name="ws_customer")
 public class Customer {
@@ -20,10 +24,10 @@ public class Customer {
     @Column(name = "surname", length = 31, nullable = false)
     private String surname;
 
-    @Column(name = "email", length = 31, nullable = false)
+    @Column(name = "email", length = 31, nullable = false, unique = true)
     private String email;
 
-    @Column(name = "phone_number", length = 15, nullable = false)
+    @Column(name = "phone_number", length = 15, nullable = false, unique = true)
     private String phoneNumber;
 
     @Column(name = "street", length = 63, nullable = false)
@@ -41,6 +45,6 @@ public class Customer {
     @Column(name = "country", length = 15, nullable = false)
     private String country;
 
-    @Column(name = "nip", length = 15)
+    @Column(name = "nip", length = 15, unique = true)
     private String nip;
 }
