@@ -18,6 +18,8 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private CategoryService categoryService;
 
+    @Autowired
+    private ProducerService producerService;
 
     @Override
     public Product findProductById(Long aProductId) {
@@ -38,7 +40,12 @@ public class ProductServiceImpl implements ProductService {
         }
         aProduct.setCategory(category);
 
-
+        // validation of producer
+        Producer producer = producerService.findProducerByNip(aProduct.getProducer().getNip());
+        if(producer == null){
+            producer = producerService.addProducer(aProduct.getProducer());
+        }
+        aProduct.setProducer(producer);
 
         return productRepository.save(aProduct);
     }
