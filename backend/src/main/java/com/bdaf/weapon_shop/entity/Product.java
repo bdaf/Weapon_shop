@@ -30,7 +30,7 @@ public class Product {
     private Double price;
 
     @Column(name = "amount", nullable = false)
-    private int amount = 1;
+    private Integer amount = 1;
 
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "producer_id", referencedColumnName = "producer_id")
