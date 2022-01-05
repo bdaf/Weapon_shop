@@ -11,13 +11,19 @@ public class ProducerServiceImpl implements ProducerService{
     @Autowired
     private ProducerRepository producerRepository;
 
-    @Override
-    public Producer findProducerByNip(String aNip) {
+    private Producer findProducerByNip(String aNip) {
         return producerRepository.findProducerByNip(aNip);
     }
 
-    @Override
-    public Producer addProducer(Producer aProducer) {
+    private Producer addProducer(Producer aProducer) {
         return producerRepository.save(aProducer);
+    }
+
+    public Producer saveProducerToDatabaseIfNotExists(Producer aProducer) {
+        Producer producer = findProducerByNip(aProducer.getNip());
+        if (producer == null) {
+            producer = addProducer(aProducer);
+        }
+        return producer;
     }
 }

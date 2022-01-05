@@ -1,7 +1,5 @@
 package com.bdaf.weapon_shop.service;
 
-import com.bdaf.weapon_shop.entity.Category;
-import com.bdaf.weapon_shop.entity.Producer;
 import com.bdaf.weapon_shop.entity.Product;
 import com.bdaf.weapon_shop.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,10 +44,10 @@ public class ProductServiceImpl implements ProductService {
         if(productToUpdate == null) throw new IllegalArgumentException("The is no product with following ID in database: "+aProductId);
 
         // updating
-        if(aProduct.getName() != null && aProduct.getName().equalsIgnoreCase("")){
+        if(aProduct.getName() != null && !aProduct.getName().equalsIgnoreCase("")){
             productToUpdate.setName(aProduct.getName());
         }
-        if(aProduct.getDescription() != null && aProduct.getDescription().equalsIgnoreCase("")){
+        if(aProduct.getDescription() != null && !aProduct.getDescription().equalsIgnoreCase("")){
             productToUpdate.setDescription(aProduct.getDescription());
         }
         if(aProduct.getPrice() != null && aProduct.getPrice() > 0){
@@ -58,7 +56,7 @@ public class ProductServiceImpl implements ProductService {
         if(aProduct.getAmount() != null && aProduct.getAmount() >= 0){
             productToUpdate.setAmount(aProduct.getAmount());
         }
-        if(aProduct.getPhotoUrl() != null && aProduct.getPhotoUrl().equalsIgnoreCase("")){
+        if(aProduct.getPhotoUrl() != null && !aProduct.getPhotoUrl().equalsIgnoreCase("")){
             productToUpdate.setPhotoUrl(aProduct.getPhotoUrl());
         }
         validationOfCategoryAndProducer(aProduct, productToUpdate);
@@ -68,27 +66,12 @@ public class ProductServiceImpl implements ProductService {
 
     private void validationOfCategoryAndProducer(Product aProduct, Product aProductToUpdate) {
         // validation and update of category
-        aProductToUpdate.setCategory(saveCategoryToDatabaseIfNotExists(aProduct));
+        aProductToUpdate.setCategory(categoryService.saveCategoryToDatabaseIfNotExists(aProduct.getCategory()));
 
-        // validation of producer
-        aProductToUpdate.setProducer(saveProducerToDatabaseIfNotExists(aProduct));
+        // validation and update of producer
+        aProductToUpdate.setProducer(producerService.saveProducerToDatabaseIfNotExists(aProduct.getProducer()));
     }
 
-    private Producer saveProducerToDatabaseIfNotExists(Product aProduct) {
-        Producer producer = producerService.findProducerByNip(aProduct.getProducer().getNip());
-        if (producer == null) {
-            producer = producerService.addProducer(aProduct.getProducer());
-        }
-        return producer;
-    }
-
-    private Category saveCategoryToDatabaseIfNotExists(Product aProduct) {
-        Category category = categoryService.findCategoryByName(aProduct.getCategory().getName());
-        if (category == null) {
-            category = categoryService.addCategory(aProduct.getCategory());
-        }
-        return category;
-    }
 
     @Override
     public void deleteProductById(Long aProductId) {

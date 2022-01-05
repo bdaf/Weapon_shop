@@ -11,14 +11,19 @@ public class CategoryServiceImpl implements CategoryService{
     @Autowired
     private CategoryRepository categoryRepository;
 
-
-    @Override
-    public Category findCategoryByName(String aName) {
+    private Category findCategoryByName(String aName) {
         return categoryRepository.findCategoryByName(aName);
     }
 
-    @Override
-    public Category addCategory(Category aCategory) {
+    private Category addCategory(Category aCategory) {
         return categoryRepository.save(aCategory);
+    }
+
+    public Category saveCategoryToDatabaseIfNotExists(Category aCategory) {
+        Category category = findCategoryByName(aCategory.getName());
+        if (category == null) {
+            category = addCategory(aCategory);
+        }
+        return category;
     }
 }
