@@ -8,4 +8,6 @@ public interface ProductService {
     Product findProductById(Long aProductId);
 
     List<Product> findAllProducts();
+
+    Product addProduct(Product aProduct);
 }
