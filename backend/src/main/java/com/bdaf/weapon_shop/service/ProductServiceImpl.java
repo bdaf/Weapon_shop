@@ -1,5 +1,7 @@
 package com.bdaf.weapon_shop.service;
 
+import com.bdaf.weapon_shop.entity.Category;
+import com.bdaf.weapon_shop.entity.Producer;
 import com.bdaf.weapon_shop.entity.Product;
 import com.bdaf.weapon_shop.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,10 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private CategoryService categoryService;
+
+
     @Override
     public Product findProductById(Long aProductId) {
         return productRepository.findById(aProductId).get();
@@ -25,6 +31,15 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product addProduct(Product aProduct) {
+        // validation of category
+        Category category = categoryService.findCategoryByName(aProduct.getCategory().getName());
+        if(category == null){
+            category = categoryService.addCategory(aProduct.getCategory());
+        }
+        aProduct.setCategory(category);
+
+
+
         return productRepository.save(aProduct);
     }
 }

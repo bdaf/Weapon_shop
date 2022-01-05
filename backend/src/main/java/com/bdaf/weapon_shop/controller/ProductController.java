@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController("api/products")
+@RestController
+@RequestMapping("/api/products")
 public class ProductController {
 
     @Autowired
