@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Data
 @AllArgsConstructor
@@ -31,6 +32,9 @@ public class Product {
 
     @Column(name = "amount", nullable = false)
     private Integer amount = 1;
+
+    @Column(name = "release_date", nullable = false)
+    private Date releaseDate = new Date(System.currentTimeMillis());
 
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "producer_id", referencedColumnName = "producer_id")
