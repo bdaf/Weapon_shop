@@ -44,7 +44,4 @@ public class Customer {
 
     @Column(name = "country", length = 15, nullable = false)
     private String country;
-
-    @Column(name = "nip", length = 15, unique = true)
-    private String nip;
 }
