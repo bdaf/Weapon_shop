@@ -11,7 +11,7 @@ public interface ProducerService {
 
     Producer findProducerById(Long aProducerId);
 
-    Producer updateProducerById(Producer aProducer, Long aProducerId);
-
-    void deleteProducerById(Long aProducerId);
+//    Producer updateProducerById(Producer aProducer, Long aProducerId);
+//
+//    void deleteProducerById(Long aProducerId);
 }

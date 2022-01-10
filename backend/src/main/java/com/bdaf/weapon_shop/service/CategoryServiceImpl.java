@@ -5,6 +5,8 @@ import com.bdaf.weapon_shop.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CategoryServiceImpl implements CategoryService{
 
@@ -15,15 +17,21 @@ public class CategoryServiceImpl implements CategoryService{
         return categoryRepository.findCategoryByName(aName);
     }
 
-    private Category addCategory(Category aCategory) {
-        return categoryRepository.save(aCategory);
-    }
-
     public Category saveCategoryToDatabaseIfNotExists(Category aCategory) {
         Category category = findCategoryByName(aCategory.getName());
         if (category == null) {
-            category = addCategory(aCategory);
+            category = categoryRepository.save(aCategory);;
         }
         return category;
+    }
+
+    @Override
+    public List<Category> findAllCategories() {
+        return categoryRepository.findAll();
+    }
+
+    @Override
+    public Category findCategoryById(Long aCategoryId) {
+        return categoryRepository.findById(aCategoryId).get();
     }
 }

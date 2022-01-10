@@ -21,16 +21,6 @@ public class ProducerServiceImpl implements ProducerService{
         return producerRepository.save(aProducer);
     }
 
-    @Override
-    public Producer updateProducerById(Producer aProducer, Long aProducerId) {
-        return null;
-    }
-
-    @Override
-    public void deleteProducerById(Long aProducerId) {
-
-    }
-
     public Producer saveProducerToDatabaseIfNotExists(Producer aProducer) {
         Producer producer = findProducerByNip(aProducer.getNip());
         if (producer == null) {
@@ -48,4 +38,14 @@ public class ProducerServiceImpl implements ProducerService{
     public Producer findProducerById(Long aProducerId) {
         return producerRepository.findById(aProducerId).get();
     }
+
+//    @Override
+//    public Producer updateProducerById(Producer aProducer, Long aProducerId) {
+//        return null;
+//    }
+//
+//    @Override
+//    public void deleteProducerById(Long aProducerId) {
+//
+//    }
 }
