@@ -51,7 +51,14 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order updateOrderById(Order aOrder, Long aOrderId) {
-        return null;
+        Order orderToChange = orderRepository.findById(aOrderId).get();
+
+        // updating only status
+        if(aOrder.getStatus() != null && !aOrder.getStatus().equalsIgnoreCase("")){
+            orderToChange.setStatus(aOrder.getStatus());
+        }
+
+        return orderRepository.save(orderToChange);
     }
 
     @Override
