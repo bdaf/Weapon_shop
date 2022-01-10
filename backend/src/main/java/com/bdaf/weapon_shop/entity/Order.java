@@ -35,14 +35,8 @@ public class Order {
     @Column(name = "status")
     private String status = NOT_ORDERED;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "order_id", referencedColumnName = "order_id")
-    private List<Product> products;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "product_id", referencedColumnName = "product_id")
+    private Product product;
 
-    public void addProduct(Product aProduct){
-        if(products == null){
-            products = new ArrayList<>();
-        }
-        products.add(aProduct);
-    }
 }
