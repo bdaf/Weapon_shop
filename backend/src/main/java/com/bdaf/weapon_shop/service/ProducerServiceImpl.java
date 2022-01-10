@@ -41,11 +41,11 @@ public class ProducerServiceImpl implements ProducerService{
 
     @Override
     public List<Producer> findAllProducers() {
-        return null;
+        return producerRepository.findAll();
     }
 
     @Override
     public Producer findProducerById(Long aProducerId) {
-        return null;
+        return producerRepository.findById(aProducerId).get();
     }
 }
