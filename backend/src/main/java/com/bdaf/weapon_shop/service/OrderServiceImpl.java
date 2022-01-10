@@ -1,6 +1,8 @@
 package com.bdaf.weapon_shop.service;
 
+import com.bdaf.weapon_shop.entity.Customer;
 import com.bdaf.weapon_shop.entity.Order;
+import com.bdaf.weapon_shop.entity.Product;
 import com.bdaf.weapon_shop.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,12 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderRepository orderRepository;
+
+    @Autowired
+    private CustomerService customerService;
+
+    @Autowired
+    private ProductService productService;
 
     @Override
     public List<Order> findAllOrders() {
@@ -25,6 +33,15 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order addOrder(Order aOrder) {
+
+        // finding customer and product by id
+        Customer customerFromOrder = customerService.findById(aOrder.getCustomer().getCustomerId());
+        Product productFromOrder = productService.findById(aOrder.getProduct().getProductId());
+
+        // setting entire customer and product to order
+        aOrder.setCustomer(customerFromOrder);
+        aOrder.setProduct(productFromOrder);
+
         return orderRepository.save(aOrder);
     }
 
