@@ -38,6 +38,10 @@ public class OrderServiceImpl implements OrderService {
         Customer customerFromOrder = customerService.findById(aOrder.getCustomer().getCustomerId());
         Product productFromOrder = productService.findById(aOrder.getProduct().getProductId());
 
+        // setting order name
+        aOrder = orderRepository.save(aOrder);
+        aOrder.setName("Order "+aOrder.getOrderId());
+
         // setting entire customer and product to order
         aOrder.setCustomer(customerFromOrder);
         aOrder.setProduct(productFromOrder);

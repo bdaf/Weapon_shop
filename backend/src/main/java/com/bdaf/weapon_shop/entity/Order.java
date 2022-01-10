@@ -28,12 +28,12 @@ public class Order {
     @Column(name = "name")
     private String name = "order";
 
+    @Column(name = "status")
+    private String status = NOT_ORDERED;
+    
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
     private Customer customer;
-
-    @Column(name = "status")
-    private String status = NOT_ORDERED;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id", referencedColumnName = "product_id")
