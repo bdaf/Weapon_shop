@@ -1,18 +1,14 @@
-import { Navbar, Container, Nav, NavDropdown} from 'react-bootstrap';
+import { Navbar, Container} from 'react-bootstrap';
+import { MDBIcon } from "mdb-react-ui-kit";
 
 function CustomNavbar() {
   return (
     <Navbar bg="dark" variant="dark">
     <Container>
       <Navbar.Brand href="#home">
-        <img
-          alt=""
-          src="/logo.svg"
-          width="30"
-          height="30"
-          className="d-inline-block align-top"
-        />{' '}
-      React Bootstrap
+      <MDBIcon icon="hammer" style={{"margin-right": "10px"}}
+      />{' '}
+      Weapon shop
       </Navbar.Brand>
     </Container>
   </Navbar>
