@@ -13,20 +13,20 @@ import java.util.List;
 public class CategoryController {
 
     @Autowired
-    private CategoryService CategoryService;
+    private CategoryService categoryService;
 
     @GetMapping
     public List<Category> getAllCategories() {
-        return CategoryService.findAllCategories();
+        return categoryService.findAllCategories();
     }
 
     @GetMapping("/{id}")
     public Category getCategoryById(@PathVariable("id") Long aCategoryId) {
-        return CategoryService.findCategoryById(aCategoryId);
+        return categoryService.findCategoryById(aCategoryId);
     }
 
     @PostMapping
     public Category saveCategory(@RequestBody Category aCategory) {
-        return CategoryService.saveCategoryToDatabaseIfNotExists(aCategory);
+        return categoryService.saveCategoryToDatabaseIfNotExists(aCategory);
     }
 }

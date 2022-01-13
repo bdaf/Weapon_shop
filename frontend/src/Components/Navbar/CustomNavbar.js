@@ -1,4 +1,4 @@
-import { Navbar, Container} from 'react-bootstrap';
+import { Navbar, Container, Nav} from 'react-bootstrap';
 import { MDBIcon } from "mdb-react-ui-kit";
 
 function CustomNavbar() {
@@ -10,6 +10,11 @@ function CustomNavbar() {
       />{' '}
       Weapon shop
       </Navbar.Brand>
+    <Nav className="me-auto">
+      <Nav.Link href="#home">Home</Nav.Link>
+      <Nav.Link href="#orders">Orders</Nav.Link>
+      <Nav.Link href="#panel">Category and Discounts (only for administrator)</Nav.Link>
+    </Nav>
     </Container>
   </Navbar>
   );
