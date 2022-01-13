@@ -34,9 +34,11 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order addOrder(Order aOrder) {
 
-        // finding customer and product by id
-        Customer customerFromOrder = customerService.findById(aOrder.getCustomer().getCustomerId());
+        // finding product by id
         Product productFromOrder = productService.findById(aOrder.getProduct().getProductId());
+
+        // finding customer by email
+        Customer customerFromOrder = customerService.addCustomerBasedOnEmail(aOrder.getCustomer());
 
         // setting order name
         aOrder = orderRepository.save(aOrder);

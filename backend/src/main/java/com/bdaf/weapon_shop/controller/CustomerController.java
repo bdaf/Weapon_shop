@@ -27,7 +27,7 @@ public class CustomerController {
 
     @PostMapping
     public Customer saveCustomer(@RequestBody Customer aCustomer) {
-        return customerService.addCustomer(aCustomer);
+        return customerService.addCustomerBasedOnEmail(aCustomer);
     }
 
     @PutMapping("/{id}")

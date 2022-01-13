@@ -9,7 +9,7 @@ public interface CustomerService {
 
     Customer findCustomerById(Long aCustomerId);
 
-    Customer addCustomer(Customer aCustomer);
+    Customer addCustomerBasedOnEmail(Customer aCustomer);
 
     Customer updateCustomerById(Customer aCustomer, Long aCustomerId);
 

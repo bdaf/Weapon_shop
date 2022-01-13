@@ -24,7 +24,7 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public Customer addCustomer(Customer aCustomer) {
+    public Customer addCustomerBasedOnEmail(Customer aCustomer) {
         Customer customerFromDatabase = customerRepository.findCustomerByEmail(aCustomer.getEmail());
         if(customerFromDatabase == null) {
             return customerRepository.save(aCustomer);
