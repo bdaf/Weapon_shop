@@ -11,20 +11,17 @@ function AdministratorPanel(){
     async function addCategoryHandler(categoryData){
         console.log(JSON.stringify(categoryData));
         let res = api.post ('/', {name: categoryData.name});
+        // setting locally ID for new category
+        categoryData.categoryId = loadedCategories[loadedCategories.length-1].categoryId+1;
+        // adding locally category to site if there isn't one with same name
+        const theSameCategory = loadedCategories.find(cat => cat.name == categoryData.name);
+        if(theSameCategory == null){
+            setLoadedCategories((prev) => (
+                [...prev, categoryData]
+            ));
+        }
+
         console.log(res);
-          
-        // fetch(
-        //     'http://localhost:80/api/categories',
-        //     {
-        //         method: 'POST',
-        //         body: JSON.stringify(categoryData),
-        //         headers: {  //very important
-        //             'Content-Type': 'application/json'
-        //         }
-        //     }
-        // ).then(r => r.json())
-        // .then(r => console.log('sykces    ' + r))
-        // .catch(err => console.log('error:   ' + err))
     }
 
     const [isLoading, setIsLoading] = useState(true);
