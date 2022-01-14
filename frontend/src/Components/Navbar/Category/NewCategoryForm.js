@@ -1,5 +1,4 @@
 import { useRef } from 'react';
-import { propTypes } from 'react-bootstrap/esm/Image';
 
 function NewCategoryForm(props){
     const nameInputRef = useRef();
@@ -13,7 +12,6 @@ function NewCategoryForm(props){
             name: enteredName
         };
 
-        console.log(categoryData);
         props.onAddCategory(categoryData);
     }
 
