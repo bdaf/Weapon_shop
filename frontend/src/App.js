@@ -3,10 +3,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap";
 import {Route, Routes} from 'react-router-dom';
 
-import CustomNavbar from './Components/Navbar/layout/CustomNavbar';
 import AdministratorPanel from './Pages/AdministratorPanel';
 import Products from './Pages/Products';
 import Orders from './Pages/Orders';
+import CustomNavbar from './Components/layout/CustomNavbar';
 
 function App() {
   return (

@@ -1,0 +1,8 @@
+.cardCenter{
+    text-align: center;
+    display: flex;
+    margin: auto;
+    flex: 0 0 !important;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
