@@ -4,36 +4,34 @@ import CategoriesList from "../Components/Navbar/Category/CategoriesList";
 
 function AdministratorPanel(){
     function addCategoryHandler(categoryData){
-        console.log(categoryData);
+        console.log(JSON.stringify(categoryData));
         fetch(
             'HTTP://localhost:80/api/categories',
             {
                 method: 'POST',
-                body: JSON.stringify(categoryData)
+                body: JSON.stringify(categoryData),
+                headers: {  //very important
+                    'Content-Type': 'application/json'
+                }
             }
-        );
+        ).then(r => r.json())
+        .then(r => console.log('sykces    ' + r))
+        .catch(err => console.log('error:   ' + err))
     }
 
     const [isLoading, setIsLoading] = useState(true);
     const [loadedCategories, setLoadedCategories] = useState([]);
 
     useEffect(() => {
-        console.log("wchodzi-1")
         fetch(
             'HTTP://localhost:80/api/categories'
-        ).catch((e) => {
-            console.log(e)
-        })
-        
-        .then(response => {
-            console.log("wchodzi")
+        ).then(response => {
             return response.json();
         }).then(data => {
-            console.log(data)
             setIsLoading(false);
             setLoadedCategories(data);
         });
-    }, []);
+    }, [loadedCategories]);
 
 
     if(isLoading) {
