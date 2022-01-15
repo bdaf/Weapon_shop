@@ -22,6 +22,10 @@ public class DiscountServiceImpl implements DiscountService{
     public Discount saveDiscountToDatabaseIfNotExists(Discount aDiscount) {
         Discount discount = discountRepository.findDiscountByPercentAndFromDateAndToDate(aDiscount.getPercent(), aDiscount.getFromDate(), aDiscount.getToDate());
         if(discount == null) {
+            if(aDiscount.getFromDate().getTime() > aDiscount.getToDate().getTime())
+                throw new IllegalArgumentException("FromDate in discount cannot be more late than toDate. FromDate: "+aDiscount.getFromDate()+" ToDate: "+aDiscount.getToDate());
+            if(aDiscount.getPercent() > 0.99) aDiscount.setPercent(0.99F);
+            if(aDiscount.getPercent() < 0.01) aDiscount.setPercent(0.01F);
             discount = discountRepository.save(aDiscount);
         }
         return discount;
