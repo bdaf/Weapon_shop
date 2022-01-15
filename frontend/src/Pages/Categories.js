@@ -7,7 +7,7 @@ const api = axios.create({
   baseURL: "http://localhost:80/api/categories",
 });
 
-function AdministratorPanel() {
+function Categories() {
   async function addCategoryHandler(categoryData) {
     // http POST method
     const res = api
@@ -54,4 +54,4 @@ function AdministratorPanel() {
   );
 }
 
-export default AdministratorPanel;
+export default Categories;
