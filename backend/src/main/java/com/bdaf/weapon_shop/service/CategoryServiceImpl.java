@@ -20,7 +20,7 @@ public class CategoryServiceImpl implements CategoryService{
     public Category saveCategoryToDatabaseIfNotExists(Category aCategory) {
         Category category = findCategoryByName(aCategory.getName());
         if (category == null) {
-            category = categoryRepository.save(aCategory);;
+            category = categoryRepository.save(aCategory);
         }
         return category;
     }

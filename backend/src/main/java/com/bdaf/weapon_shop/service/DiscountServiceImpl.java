@@ -20,6 +20,10 @@ public class DiscountServiceImpl implements DiscountService{
 
     @Override
     public Discount saveDiscountToDatabaseIfNotExists(Discount aDiscount) {
-        return null;
+        Discount discount = discountRepository.findDiscountByPercentAndFromDateAndToDate(aDiscount.getPercent(), aDiscount.getFromDate(), aDiscount.getToDate());
+        if(discount == null) {
+            discount = discountRepository.save(aDiscount);
+        }
+        return discount;
     }
 }
