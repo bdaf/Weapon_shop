@@ -13,10 +13,10 @@ function CustomNavbar() {
       Weapon shop
       </Navbar.Brand>
     <Nav className="me-auto">
-      {/* <Nav.Link><Link to='products'>Products</Link></Nav.Link>
+      <Nav.Link><Link to='products'>Products</Link></Nav.Link>
       <Nav.Link><Link to='orders'>Orders</Link></Nav.Link>
       <Nav.Link><Link to='panel'>Category and Discounts (only for administrator)</Link></Nav.Link>
-      <Nav.Link>Styling ok</Nav.Link> */}
+      <Nav.Link>Styling ok</Nav.Link>
     </Nav>
     </Container>
   </Navbar>
