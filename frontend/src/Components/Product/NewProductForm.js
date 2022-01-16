@@ -1,6 +1,7 @@
 import { useRef } from "react";
 
 function NewProductForm(props) {
+
     const nameInputRef = useRef();
     const descriptionInputRef = useRef();
     const priceInputRef = useRef();
@@ -8,6 +9,11 @@ function NewProductForm(props) {
     const releaseDateInputRef = useRef();
     const photoUrlInputRef = useRef();
     const forSaleInputRef = useRef();
+
+    const categoryInputRef = useRef();
+
+    const companyNameInputRef = useRef();
+    const nipInputRef = useRef();
 
     function submitHandler(event) {
         event.preventDefault();
@@ -20,6 +26,12 @@ function NewProductForm(props) {
         const enteredPhotoUrl = photoUrlInputRef.current.value;
         const enteredForSale = forSaleInputRef.current.value;
 
+        const enteredNameCategory = categoryInputRef.current.value;
+
+        const enteredCompanyName = companyNameInputRef.current.value;
+        const enteredNip = nipInputRef.current.value;
+
+
         const productData = {
             name: enteredName,
             description: enteredDescription,
@@ -28,7 +40,13 @@ function NewProductForm(props) {
             releaseDate: enteredReleaseDate,
             photoUrl: enteredPhotoUrl,
             forSale: enteredForSale,
-
+            category: {
+                nameCategory: enteredNameCategory,
+            },
+            producer: {
+                companyName: enteredCompanyName,
+                nip: enteredNip,
+            },
         };
 
         props.onAddProduct(productData);
@@ -51,6 +69,12 @@ function NewProductForm(props) {
                 <input type="url" required id="photoUrl" ref={photoUrlInputRef} /><br></br>
                 <label htmlFor="name">For Sale:</label>
                 <input type="text" required id="forSale" ref={forSaleInputRef} /><br></br>
+                <label htmlFor="name">Category Name:</label>
+                <input type="text" required id="nameCategory" ref={categoryInputRef} /><br></br>
+                <label htmlFor="name">Company Name:</label>
+                <input type="text" required id="companyName" ref={companyNameInputRef} /><br></br>
+                <label htmlFor="name">NIP:</label>
+                <input type="number" required id="nip" ref={nipInputRef} /><br></br>
                 <button>Add product</button>
             </form>
         </div>

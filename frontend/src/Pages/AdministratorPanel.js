@@ -45,9 +45,9 @@ function AdministratorPanel() {
   }
 
   return (
-    <div>
-      <h1>AdministratorPanel</h1>
-      <h1>Add new category:</h1>
+      <div>
+          <br></br>
+      <h4>Add New Category:</h4>
       <NewCategoryForm onAddCategory={addCategoryHandler} />
       <CategoriesList categories={loadedCategories} />
     </div>
