@@ -1,5 +1,6 @@
 package com.bdaf.weapon_shop.service;
 
+import com.bdaf.weapon_shop.entity.Category;
 import com.bdaf.weapon_shop.entity.Product;
 import com.bdaf.weapon_shop.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,10 +34,15 @@ public class ProductServiceImpl implements ProductService {
     public Product addProduct(Product aProduct) {
         // validation of category
         validationOfCategoryAndProducer(aProduct, aProduct);
-
-        
-
-        return productRepository.save(aProduct);
+        // find product in DB
+        Product product = productRepository.findProductByNameAndProducer(aProduct.getName(), aProduct.getProducer());
+        if (product == null) { // if new product: create new
+            product = productRepository.save(aProduct);
+        } else { // if products are the same: increase amount
+            product.setAmount(product.getAmount()+aProduct.getAmount());
+            product = productRepository.save(product);
+        }
+        return product;
     }
 
     @Override
