@@ -8,30 +8,22 @@ function CustomNavbar() {
     <Navbar bg="dark" variant="dark" className={styles.customNavbar}>
       <Container>
         <Navbar.Brand>
-          <Link to="products" class="link-light">
+          <Link to="products" className="link-light">
             <MDBIcon icon="hammer" style={{ marginRight: "10px" }} /> Weaponshop
           </Link>
         </Navbar.Brand>
-        <Nav.Link>
-          <Link to="products" class="link-light">
-            Products
-          </Link>
-        </Nav.Link>
-        <Nav.Link>
-          <Link to="orders" class="link-light">
-            Orders
-          </Link>
-        </Nav.Link>
-        <Nav.Link>
-          <Link to="categories" class="link-light">
-            Category (OFA)
-          </Link>
-        </Nav.Link>
-        <Nav.Link>
-          <Link to="discounts" class="link-light">
-            Discounts (OFA)
-          </Link>
-        </Nav.Link>
+        <Link to="products" className="link-light">
+          Products
+        </Link>
+        <Link to="orders" className="link-light">
+          Orders
+        </Link>
+        <Link to="categories" className="link-light">
+          Category (OFA)
+        </Link>
+        <Link to="discounts" className="link-light">
+          Discounts (OFA)
+        </Link>
       </Container>
     </Navbar>
   );

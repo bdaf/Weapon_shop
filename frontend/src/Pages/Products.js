@@ -43,7 +43,6 @@ function Products(props) {
 
     useEffect(() => {
         api.get("/").then(function (response) {
-            console.log("Wywołanie");
             setIsLoading(false);
             setLoadedProducts(response.data);
         });
