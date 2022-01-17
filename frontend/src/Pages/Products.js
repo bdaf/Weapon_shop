@@ -18,7 +18,7 @@ function Products(props) {
                 amount: productData.amount,
                 producer: productData.producer,
                 category: productData.category,
-                photoUrl: productData.photoUrl 
+                photoUrl: productData.photoUrl, 
             })
             .then(function (response) {
                 // get result data from http method
@@ -61,7 +61,7 @@ function Products(props) {
             <h1>Products</h1>
             <h1>Add new product:</h1>
             <NewProductForm onAddProduct={addProductHandler} />
-            <ProductsList products={loadedProducts} />
+            <ProductsList products={loadedProducts} />     
         </div>
     );
 }

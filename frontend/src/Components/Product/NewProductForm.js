@@ -56,7 +56,7 @@ function NewProductForm(props) {
                 <label htmlFor="photoUrl">Photo URL:</label>
                 <input type="url" required id="photoUrl" ref={photoUrlInputRef} /><br></br>
                 <label htmlFor="nameCategory">Category Name:</label>
-                <input type="text" required id="nameCategory" ref={categoryInputRef} /><br></br>
+                <input type="text" required id="category" ref={categoryInputRef} /><br></br>
                 <label htmlFor="companyName">Company Name:</label>
                 <input type="text" required id="companyName" ref={companyNameInputRef} /><br></br>
                 <label htmlFor="nip">NIP:</label>

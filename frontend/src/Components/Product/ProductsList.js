@@ -1,24 +1,30 @@
 import ProductCard from "./ProductCard";
-import styles from "./ProductsList.module.css";
-import { Col, Row } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 
 function ProductsList(props) {
   return (
-    <div>
-      <Row>
+      <div>
+          <Table stripped bordered hover variant="dark" className="table-responsive-sm">
+          <thead>
+              <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Amount</th>
+                    <th>Photo URL</th>
+                    <th>Category Name</th>
+                    <th>Company Name</th>
+                    <th>NIP</th>
+              </tr>
+          </thead>
         {props.products.map((product) => {
           return (
-            <Col
-              xs={4}
-              key={product.productId}
-              className={styles.cardCenter}
-              bg={"Light"}
-            >
-              <ProductCard product={product} />
-            </Col>
+            <tbody key={product.productId}>
+                  <ProductCard product={product} />
+            </tbody>
           );
         })}
-      </Row>
+          </Table>
     </div>
   );
 }
