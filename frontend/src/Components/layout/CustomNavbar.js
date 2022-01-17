@@ -14,7 +14,8 @@ function CustomNavbar() {
       </Navbar.Brand>
               <Nav.Link><Link to='products' class="link-light">Products</Link></Nav.Link>
               <Nav.Link><Link to='orders' class="link-light">Orders</Link></Nav.Link>
-              <Nav.Link><Link to='categories' class="link-light">Category and Discounts (only for administrator)</Link></Nav.Link>
+              <Nav.Link><Link to='categories' class="link-light">Category (OFA)</Link></Nav.Link>
+              <Nav.Link><Link to='discounts' class="link-light">Discounts (OFA)</Link></Nav.Link>
     </Container>
   </Navbar>
   );
