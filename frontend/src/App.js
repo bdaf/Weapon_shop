@@ -8,6 +8,7 @@ import Orders from './Pages/Orders';
 import Discounts from './Pages/Discounts';
 import CustomNavbar from './Components/layout/CustomNavbar';
 import Categories from './Pages/Categories';
+import CategoryDetails from './Components/Category/CategoryDetails';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <CustomNavbar />
         <Routes>
           <Route path='/categories' element={<Categories />} />
+          <Route path='/categories/:id' element={<CategoryDetails />} />
           <Route path='/discounts' element={<Discounts />} />
           <Route path='/products' element={<Products />} />
           <Route path='/orders' element={<Orders />} />
