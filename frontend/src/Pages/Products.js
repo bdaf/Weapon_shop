@@ -26,11 +26,12 @@ function Products(props) {
                 // check if there isn't one with same name
                 const theSameProduct = loadedProducts.find(
                     (cat) => cat.name == resultData.name
+                    && cat.producer.nip == resultData.producer.nip
                 );
                 // adding locally product to site if condition above
                 if (theSameProduct == null) {
                     setLoadedProducts((prev) => [...prev, resultData]);
-                } else {
+                } else { // changing properties of the same product if it already existed
                     theSameProduct.amount = resultData.amount;
                     setLoadedProducts((prev) => [...prev]);
                 }
