@@ -50,7 +50,7 @@ function AddDiscountToCategory(props){
 
         setFeedback(
           <Alert variant="danger">
-            Error appeared, try to choose discount properly or wait a minute and refresh page. 
+            Error occured, propably this discount already is in this category. Try with other one.
           </Alert>
         );
       });
