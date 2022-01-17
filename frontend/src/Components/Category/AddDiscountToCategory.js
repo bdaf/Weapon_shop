@@ -32,7 +32,7 @@ function AddDiscountToCategory(props){
     e.preventDefault();
 
     await axios
-      .post(`http://localhost:80/api/categories/${props.category.categoryId}`, {})
+      .post(`http://localhost:80/api/categories/${props.category.categoryId}`, {discountId: e.value})
       .then((response) => {
         // props.onChange((prevState) => !prevState);
         if (response.status === 200)

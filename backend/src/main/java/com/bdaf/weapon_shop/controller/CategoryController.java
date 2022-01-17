@@ -1,6 +1,7 @@
 package com.bdaf.weapon_shop.controller;
 
 import com.bdaf.weapon_shop.entity.Category;
+import com.bdaf.weapon_shop.entity.Discount;
 import com.bdaf.weapon_shop.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,7 @@ public class CategoryController {
     }
 
     @PostMapping
-    public Category saveCategory(@RequestBody Category aCategory) {
-        return categoryService.saveCategoryToDatabaseIfNotExists(aCategory);
+    public Category saveDiscountToCategory(@PathVariable("id") Long aCategoryId, @RequestBody Discount aDiscount) {
+        return categoryService.saveDiscountToCategory(aCategoryId, aDiscount);
     }
 }

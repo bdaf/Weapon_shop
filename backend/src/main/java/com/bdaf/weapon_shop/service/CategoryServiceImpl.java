@@ -1,6 +1,7 @@
 package com.bdaf.weapon_shop.service;
 
 import com.bdaf.weapon_shop.entity.Category;
+import com.bdaf.weapon_shop.entity.Discount;
 import com.bdaf.weapon_shop.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,5 +39,12 @@ public class CategoryServiceImpl implements CategoryService{
     @Override
     public Category findById(Long aCategoryId) {
         return categoryRepository.findById(aCategoryId).get();
+    }
+
+    @Override
+    public Category saveDiscountToCategory(Long aCategoryId, Discount aDiscount) {
+        Category category = categoryRepository.findById(aCategoryId).get();
+        category.addDiscount(aDiscount);
+        return categoryRepository.save(category);
     }
 }
