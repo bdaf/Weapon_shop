@@ -11,6 +11,7 @@ function AddDiscountToCategory(props){
 
   const fetchDate = async () => {
     await axios.get("http://localhost:80/api/discounts").then((response) => {
+      console.log("fetchDate()");
       const discountOptions = response.data.map((d) => {
           const discountLabel = (d.percent*100)+'% - From: '+ d.fromDate + ', To: ' + d.toDate;
         return { value: d.discountId, label: discountLabel };
@@ -21,7 +22,7 @@ function AddDiscountToCategory(props){
 
   useEffect(() => {
     fetchDate();
-  });
+  }, []);
 
   useEffect(() => {
       setFeedback(null)
@@ -31,7 +32,7 @@ function AddDiscountToCategory(props){
     e.preventDefault();
 
     await axios
-      .post(`http://localhost:80/api/categories/${category.value}`, {})
+      .post(`http://localhost:80/api/categories/${props.category.categoryId}`, {})
       .then((response) => {
         // props.onChange((prevState) => !prevState);
         if (response.status === 200)
@@ -59,7 +60,8 @@ function AddDiscountToCategory(props){
   };
 
   return (
-    <div className="m-3">SIEMA
+    <div className="m-3">
+      <h2>All discounts from database:</h2>
       <Form onSubmit={(e) => addDiscountToCategoryHandler(e)}>
         <Row className="mb-3">
           <Col xs={6} md={6}>
