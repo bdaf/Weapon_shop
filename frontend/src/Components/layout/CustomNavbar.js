@@ -13,10 +13,10 @@ function CustomNavbar() {
           </Link>
         </Navbar.Brand>
         <Link to="products" className="link-light">
-          Products
+          Products (OFA)
         </Link>
         <Link to="orders" className="link-light">
-          Orders
+          Orders (OFA)
         </Link>
         <Link to="categories" className="link-light">
           Category (OFA)

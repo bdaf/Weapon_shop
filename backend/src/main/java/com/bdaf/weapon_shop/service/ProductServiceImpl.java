@@ -116,12 +116,13 @@ public class ProductServiceImpl implements ProductService {
         for (int i = 0; i < discounts.size(); i++) {
             if ((theBiggestDiscount == null || // if is bigger than the biggest previous
                     theBiggestDiscount.getPercent() < discounts.get(i).getPercent())
-                    && discounts.get(i).getFromDate().getTime() < now.getTime() // and if time is appropriate
-                    && now.getTime() < discounts.get(i).getToDate().getTime());
+                    && discounts.get(i).getFromDate().getTime() < now.getTime()
+                    && now.getTime() < discounts.get(i).getToDate().getTime())
             theBiggestDiscount = discounts.get(i);
         }
         if (theBiggestDiscount != null) {
-            product.setPrice(product.getPrice() * (1 - theBiggestDiscount.getPercent()));
+            Float priceAfterBiggestDiscount = (float) (product.getPrice() * (1 - theBiggestDiscount.getPercent()));
+            product.setPrice(Double.valueOf(priceAfterBiggestDiscount));
         }
         return product;
     }

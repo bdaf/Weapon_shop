@@ -15,7 +15,7 @@ function Discounts() {
       .post("/", { 
         percent: discountData.percent,
         fromDate: discountData.fromDate,
-        toDate: discountData.fromDate
+        toDate: discountData.toDate
        })
       .then(function (response) {
         // get result data from http method
@@ -24,7 +24,7 @@ function Discounts() {
         const theSameDiscount = loadedDiscounts.find(
           (dis) => dis.percent == resultData.percent &&
           dis.fromDate == resultData.fromDate &&
-          dis.fromDate == resultData.fromDate
+          dis.toDate == resultData.toDate
         );
         // adding locally discount to site if condition above
         if (theSameDiscount == null) {

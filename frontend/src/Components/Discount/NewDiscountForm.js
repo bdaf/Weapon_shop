@@ -16,7 +16,7 @@ function NewDiscountForm(props) {
     const discountData = {
       percent: enteredpercent,
       fromDate: enteredfrom,
-      fromDate: enteredto
+      toDate: enteredto
     };
 
     props.onAddDiscount(discountData);
