@@ -1,6 +1,7 @@
-import NewDiscountForm from "../Components/Discount/NewDiscountForm";
+import { Alert } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import NewDiscountForm from "../Components/Discount/NewDiscountForm";
 import DiscountsList from "../Components/Discount/DiscountsList";
 
 const api = axios.create({
@@ -8,6 +9,7 @@ const api = axios.create({
 });
 
 function Discounts() {
+  const [feedback, setFeedback] = useState(null);
 
   async function addDiscountHandler(discountData) {
     // http POST method
@@ -18,18 +20,30 @@ function Discounts() {
         toDate: discountData.toDate
        })
       .then(function (response) {
-        // get result data from http method
-        const resultData = response.data;
-        // check if there isn't one with same name
-        const theSameDiscount = loadedDiscounts.find(
-          (dis) => dis.percent == resultData.percent &&
-          dis.fromDate == resultData.fromDate &&
-          dis.toDate == resultData.toDate
+        if (response.status === 200){
+          setFeedback(<Alert variant="success">Discount has been added!</Alert>);
+          // get result data from http method
+          const resultData = response.data;
+          // check if there isn't one with same name
+          const theSameDiscount = loadedDiscounts.find(
+            (dis) => dis.percent == resultData.percent &&
+            dis.fromDate == resultData.fromDate &&
+            dis.toDate == resultData.toDate
+          );
+          // adding locally discount to site if condition above
+          if (theSameDiscount == null) {
+            setLoadedDiscounts((prev) => [...prev, resultData]);
+          }
+        } else
+        setFeedback(<Alert variant="danger">We couldn't add this discount!</Alert>);
+      })
+      .catch((e) => {
+        console.log(e);
+        setFeedback(
+          <Alert variant="danger">
+            Error occured, propably this discount already is in database. Try with another one.
+          </Alert>
         );
-        // adding locally discount to site if condition above
-        if (theSameDiscount == null) {
-          setLoadedDiscounts((prev) => [...prev, resultData]);
-        }
       });
   }
 
@@ -57,6 +71,7 @@ function Discounts() {
       <h1>Add new discount:</h1>
       
       <NewDiscountForm onAddDiscount={addDiscountHandler} />
+      {feedback != null ? feedback : null }
       <DiscountsList discounts={loadedDiscounts} />
     </div>
   );

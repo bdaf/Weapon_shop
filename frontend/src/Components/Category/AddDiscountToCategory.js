@@ -6,7 +6,6 @@ import Select from "react-select";
 function AddDiscountToCategory(props){
 
   const [feedback, setFeedback] = useState(null);
-  const [category, setCategory] = useState('');
   const [discount, setDiscount] = useState({});
   const [discountOptions, setDiscountOptions] = useState([]);
 
@@ -25,10 +24,6 @@ function AddDiscountToCategory(props){
   useEffect(() => {
     fetchDate();
   }, []);
-
-  useEffect(() => {
-      setFeedback(null)
-  }, [category])
 
   const addDiscountToCategoryHandler = async (e) => {
     e.preventDefault();
@@ -57,8 +52,6 @@ function AddDiscountToCategory(props){
   };
 
   const setDiscountsHandler = (e) => {
-    // setName(e.label);
-    // setDiscounts(e);
     setFeedback(null);
     setDiscount({discountId: e.value});
   };
