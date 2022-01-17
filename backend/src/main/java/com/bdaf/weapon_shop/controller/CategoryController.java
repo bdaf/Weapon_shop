@@ -2,6 +2,7 @@ package com.bdaf.weapon_shop.controller;
 
 import com.bdaf.weapon_shop.entity.Category;
 import com.bdaf.weapon_shop.entity.Discount;
+import com.bdaf.weapon_shop.repository.DiscountRepository;
 import com.bdaf.weapon_shop.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,8 @@ public class CategoryController {
 
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private DiscountRepository discountRepository;
 
     @GetMapping
     public List<Category> getAllCategories() {
@@ -27,7 +30,14 @@ public class CategoryController {
     }
 
     @PostMapping
-    public Category saveDiscountToCategory(@PathVariable("id") Long aCategoryId, @RequestBody Discount aDiscount) {
-        return categoryService.saveDiscountToCategory(aCategoryId, aDiscount);
+    public Category saveCategory(@RequestBody Category aCategory) {
+        return categoryService.saveCategoryToDatabaseIfNotExists(aCategory);
     }
+
+    @PostMapping("/{id}")
+    public Category saveDiscountToCategory(@PathVariable("id") Long aCategoryId, @RequestBody Discount aDiscount) {
+        Discount discount = discountRepository.findById(aDiscount.getDiscountId()).get();
+        return categoryService.saveDiscountToCategory(aCategoryId, discount);
+    }
+
 }

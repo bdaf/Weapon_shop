@@ -7,6 +7,7 @@ function AddDiscountToCategory(props){
 
   const [feedback, setFeedback] = useState(null);
   const [category, setCategory] = useState('');
+  const [discount, setDiscount] = useState({});
   const [discountOptions, setDiscountOptions] = useState([]);
 
   const fetchDate = async () => {
@@ -17,6 +18,7 @@ function AddDiscountToCategory(props){
         return { value: d.discountId, label: discountLabel };
       });
       setDiscountOptions(discountOptions);
+      console.log(discountOptions);
     });
   };
 
@@ -30,9 +32,8 @@ function AddDiscountToCategory(props){
 
   const addDiscountToCategoryHandler = async (e) => {
     e.preventDefault();
-
     await axios
-      .post(`http://localhost:80/api/categories/${props.category.categoryId}`, {discountId: e.value})
+      .post(`http://localhost:80/api/categories/${props.category.categoryId}`, {discountId: discount.discountId})
       .then((response) => {
         // props.onChange((prevState) => !prevState);
         if (response.status === 200)
@@ -46,6 +47,7 @@ function AddDiscountToCategory(props){
       })
       .catch((e) => {
         console.log(e);
+
         setFeedback(
           <Alert variant="danger">
             Nastąpił błąd podczas próby wywołania metody http!
@@ -57,8 +59,9 @@ function AddDiscountToCategory(props){
   const setDiscountsHandler = (e) => {
     // setName(e.label);
     // setDiscounts(e);
+    setFeedback(null);
+    setDiscount({discountId: e.value});
   };
-
   return (
     <div className="m-3">
       <h2>All discounts from database:</h2>
@@ -72,6 +75,7 @@ function AddDiscountToCategory(props){
             />
           </Col>
         </Row>
+        {feedback != null ? feedback : null }
         <Button
           className="ps-4 pe-4"
           variant="outline-danger"
