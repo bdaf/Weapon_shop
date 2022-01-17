@@ -41,10 +41,11 @@ public class CategoryServiceImpl implements CategoryService{
         return categoryRepository.findById(aCategoryId).get();
     }
 
-
     @Override
     public Category saveDiscountToCategory(Long aCategoryId, Discount aDiscount) {
         Category category = categoryRepository.findById(aCategoryId).get();
+        boolean ifCategoryHasThisDiscount = category.getDiscounts().stream().anyMatch(d -> d.getDiscountId() == aDiscount.getDiscountId());
+        if(ifCategoryHasThisDiscount) throw new IllegalArgumentException("Category already has discount with id: "+aDiscount.getDiscountId());
         category.addDiscount(aDiscount);
         return categoryRepository.save(category);
     }

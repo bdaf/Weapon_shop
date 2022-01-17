@@ -38,11 +38,11 @@ function AddDiscountToCategory(props){
         // props.onChange((prevState) => !prevState);
         if (response.status === 200)
           setFeedback(
-            <Alert variant="success">Zniżka została dodana do kategorii!</Alert>
+            <Alert variant="success">Discount has been added to category!</Alert>
           );
         else
           setFeedback(
-            <Alert variant="danger">Nie udało się dodać zniżki!</Alert>
+            <Alert variant="danger">We couldn't add this discount to category!</Alert>
           );
       })
       .catch((e) => {
@@ -50,7 +50,7 @@ function AddDiscountToCategory(props){
 
         setFeedback(
           <Alert variant="danger">
-            Nastąpił błąd podczas próby wywołania metody http!
+            Error appeared, try to choose discount properly or wait a minute and refresh page. 
           </Alert>
         );
       });
@@ -67,11 +67,11 @@ function AddDiscountToCategory(props){
       <h2>All discounts from database:</h2>
       <Form onSubmit={(e) => addDiscountToCategoryHandler(e)}>
         <Row className="mb-3">
-          <Col xs={6} md={6}>
+          <Col xs={12} md={12}>
             <Select
               onChange={(e) => setDiscountsHandler(e)}
               options={discountOptions}
-              placeholder="Discounts"
+              placeholder="Choose discount to add it to category"
             />
           </Col>
         </Row>
