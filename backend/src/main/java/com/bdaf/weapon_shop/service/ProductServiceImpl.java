@@ -34,6 +34,8 @@ public class ProductServiceImpl implements ProductService {
         // validation of category
         validationOfCategoryAndProducer(aProduct, aProduct);
 
+        
+
         return productRepository.save(aProduct);
     }
 

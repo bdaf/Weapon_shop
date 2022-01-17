@@ -11,7 +11,15 @@ function Products(props) {
     async function addProductHandler(productData) {
     // http POST method
         const res = api
-            .post("/", { name: productData.name })
+            .post("/", { 
+                name: productData.name,
+                description: productData.description,
+                price: productData.price,
+                amount: productData.amount,
+                producer: productData.producer,
+                category: productData.category,
+                photoUrl: productData.photoUrl 
+            })
             .then(function (response) {
                 // get result data from http method
                 const resultData = response.data;

@@ -6,12 +6,8 @@ function NewProductForm(props) {
     const descriptionInputRef = useRef();
     const priceInputRef = useRef();
     const amountInputRef = useRef();
-    const releaseDateInputRef = useRef();
     const photoUrlInputRef = useRef();
-    const forSaleInputRef = useRef();
-
     const categoryInputRef = useRef();
-
     const companyNameInputRef = useRef();
     const nipInputRef = useRef();
 
@@ -22,33 +18,27 @@ function NewProductForm(props) {
         const enteredDescription = descriptionInputRef.current.value;
         const enteredPrice = priceInputRef.current.value;
         const enteredAmount = amountInputRef.current.value;
-        const enteredReleaseDate = releaseDateInputRef.current.value;
         const enteredPhotoUrl = photoUrlInputRef.current.value;
-        const enteredForSale = forSaleInputRef.current.value;
-
         const enteredNameCategory = categoryInputRef.current.value;
-
         const enteredCompanyName = companyNameInputRef.current.value;
         const enteredNip = nipInputRef.current.value;
-
+        console.log(enteredNameCategory);
 
         const productData = {
             name: enteredName,
             description: enteredDescription,
             price: enteredPrice,
             amount: enteredAmount,
-            releaseDate: enteredReleaseDate,
             photoUrl: enteredPhotoUrl,
-            forSale: enteredForSale,
             category: {
-                nameCategory: enteredNameCategory,
+                name: enteredNameCategory,
             },
             producer: {
                 companyName: enteredCompanyName,
                 nip: enteredNip,
             },
         };
-
+        console.log(productData);
         props.onAddProduct(productData);
     }
 
@@ -57,24 +47,20 @@ function NewProductForm(props) {
             <form onSubmit={submitHandler}>
                 <label htmlFor="name">Name:</label>
                 <input type="text" required id="name" ref={nameInputRef} /> <br></br>
-                <label htmlFor="name">Description:</label>
+                <label htmlFor="description">Description:</label>
                 <input type="text" required id="description" ref={descriptionInputRef} /><br></br>
-                <label htmlFor="name">Price:</label>
+                <label htmlFor="price">Price:</label>
                 <input type="number" required id="price" ref={priceInputRef} /><br></br>
-                <label htmlFor="name">Amount:</label>
+                <label htmlFor="amount">Amount:</label>
                 <input type="number" required id="amount" ref={amountInputRef} /><br></br>
-                <label htmlFor="name">Release Date:</label>
-                <input type="text" required id="releaseDate" ref={releaseDateInputRef} /><br></br>
-                <label htmlFor="name">Photo URL:</label>
+                <label htmlFor="photoUrl">Photo URL:</label>
                 <input type="url" required id="photoUrl" ref={photoUrlInputRef} /><br></br>
-                <label htmlFor="name">For Sale:</label>
-                <input type="text" required id="forSale" ref={forSaleInputRef} /><br></br>
-                <label htmlFor="name">Category Name:</label>
+                <label htmlFor="nameCategory">Category Name:</label>
                 <input type="text" required id="nameCategory" ref={categoryInputRef} /><br></br>
-                <label htmlFor="name">Company Name:</label>
+                <label htmlFor="companyName">Company Name:</label>
                 <input type="text" required id="companyName" ref={companyNameInputRef} /><br></br>
-                <label htmlFor="name">NIP:</label>
-                <input type="number" required id="nip" ref={nipInputRef} /><br></br>
+                <label htmlFor="nip">NIP:</label>
+                <input type="text" required id="nip" ref={nipInputRef} /><br></br>
                 <button>Add product</button>
             </form>
         </div>
