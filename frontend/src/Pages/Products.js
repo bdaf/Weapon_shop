@@ -30,6 +30,9 @@ function Products(props) {
                 // adding locally product to site if condition above
                 if (theSameProduct == null) {
                     setLoadedProducts((prev) => [...prev, resultData]);
+                } else {
+                    theSameProduct.amount = resultData.amount;
+                    setLoadedProducts((prev) => [...prev]);
                 }
             });
     }
@@ -39,6 +42,7 @@ function Products(props) {
 
     useEffect(() => {
         api.get("/").then(function (response) {
+            console.log("Wywołanie");
             setIsLoading(false);
             setLoadedProducts(response.data);
         });
