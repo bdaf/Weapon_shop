@@ -16,4 +16,6 @@ public interface ProductService {
     void deleteProductById(Long aProductId);
 
     Product findById(Long aProductId);
+
+    Product fetchProductForSaleById(Long aProductId);
 }

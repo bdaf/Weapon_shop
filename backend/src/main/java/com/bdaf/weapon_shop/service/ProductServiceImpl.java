@@ -1,11 +1,13 @@
 package com.bdaf.weapon_shop.service;
 
 import com.bdaf.weapon_shop.entity.Category;
+import com.bdaf.weapon_shop.entity.Discount;
 import com.bdaf.weapon_shop.entity.Product;
 import com.bdaf.weapon_shop.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.List;
 
 @Service
@@ -27,7 +29,20 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> findAllProducts() {
-        return productRepository.findAll();
+        List<Product> products = productRepository.findProductsByForSale(true);
+        for (int i = 0; i < products.size(); i++) {
+            products.set(i, getDiscountedProduct(products.get(i)));
+        }
+        return products;
+    }
+
+    @Override
+    public Product fetchProductForSaleById(Long aProductId) {
+        Product product = productRepository.findProductByProductIdAndForSale(aProductId, true);
+        if (product == null) {
+            product = productRepository.findById(aProductId).get();
+        }
+        return getDiscountedProduct(product);
     }
 
     @Override
@@ -89,5 +104,25 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product findById(Long aProductId) {
         return productRepository.findById(aProductId).get();
+    }
+
+    private Product getDiscountedProduct(Product product) {
+        // take category of product
+        Long categoryId = product.getCategory().getCategoryId();
+        List<Discount> discounts = categoryService.findById(categoryId).getDiscounts();
+        // count the biggest discount which product has
+        Discount theBiggestDiscount = null;
+        Date now = new Date(System.currentTimeMillis()); // if date includes now
+        for (int i = 0; i < discounts.size(); i++) {
+            if ((theBiggestDiscount == null || // if is bigger than the biggest previous
+                    theBiggestDiscount.getPercent() < discounts.get(i).getPercent())
+                    && discounts.get(i).getFromDate().getTime() < now.getTime() // and if time is appropriate
+                    && now.getTime() < discounts.get(i).getToDate().getTime());
+            theBiggestDiscount = discounts.get(i);
+        }
+        if (theBiggestDiscount != null) {
+            product.setPrice(product.getPrice() * (1 - theBiggestDiscount.getPercent()));
+        }
+        return product;
     }
 }
