@@ -17,4 +17,6 @@ public interface CategoryService {
     Category saveDiscountToCategory(Long aCategoryId, Discount aDiscount);
 
     Category saveCategoryAndIfAlreadyExistsThrowException(Category aCategory);
+
+    void deleteDiscountFromCategory(Long aCategoryId, Discount aDiscount);
 }
