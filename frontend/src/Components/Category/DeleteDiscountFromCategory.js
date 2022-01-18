@@ -33,8 +33,9 @@ function DeleteDiscountFromCategory(props) {
   }
 
   return (
-    <Form onSubmit={(e) => deleteDiscountFromCategoryHandler(e)}>
-      <h2>Delete discount from category:</h2>
+      <Form onSubmit={(e) => deleteDiscountFromCategoryHandler(e)}>
+          <br></br>
+      <h5>Delete discount from Category:</h5>
       <Row className="mb-3">
         <Col xs={12} md={12}>
           <Select

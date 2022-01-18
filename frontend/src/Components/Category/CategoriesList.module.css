@@ -20,6 +20,23 @@
     padding-top: 2%;
 }
 
+.padding {
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+.padding2 {
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top:2%;
+    padding-bottom:2%;
+}
+
+.imargin {
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
 .alerts {
     margin-left: 20%;
     margin-right: 20%;
