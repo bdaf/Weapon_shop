@@ -38,6 +38,12 @@ public class CategoryController {
     }
 
     @DeleteMapping("/{id}")
+    public String deleteCategoryById(@PathVariable("id") Long aCategoryId) {
+        categoryService.deleteCategoryById(aCategoryId);
+        return "Category with Id " + aCategoryId + " has been deleted successfully!";
+    }
+
+    @DeleteMapping("/{id}/discount")
     public String deleteDiscountFromCategory(@PathVariable("id") Long aCategoryId, @RequestBody Discount aDiscount) {
         categoryService.deleteDiscountFromCategory(aCategoryId, aDiscount);
         return "Discount with Id " + aDiscount.getDiscountId() + " has been deleted successfully!";

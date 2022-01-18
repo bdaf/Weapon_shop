@@ -82,7 +82,7 @@ function AddDiscountToCategory(props) {
     e.preventDefault();
     console.log("usuwamy");
     await axios
-      .delete(`http://localhost:80/api/categories/${props.category.categoryId}`, {
+      .delete(`http://localhost:80/api/categories/${props.category.categoryId}/discount`, {
         data: {discountId: discountToDelete.discountId}
       })
       .then((response) => {

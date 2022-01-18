@@ -72,4 +72,9 @@ public class CategoryServiceImpl implements CategoryService{
         category.getDiscounts().remove(discountToDelete.get());
         categoryRepository.save(category);
     }
+
+    @Override
+    public void deleteCategoryById(Long aCategoryId) {
+        categoryRepository.deleteById(aCategoryId);
+    }
 }

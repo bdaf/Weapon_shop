@@ -10,7 +10,7 @@ function CategoriesList(props) {
       <Row>
         {props.categories.map((category) => {
             return (
-                <Col xs={4} key={category.categoryId} className={styles.cardCenter} bg={"Light"}>
+                <Col ms={4} xs={12} key={category.categoryId} className={styles.cardCenter} bg={"Light"}>
               <CategoryCard category={category} />
             </Col>
           );
