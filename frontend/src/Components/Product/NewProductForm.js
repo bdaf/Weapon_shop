@@ -44,10 +44,10 @@ function NewProductForm(props) {
     }
 
     return (
-        <div className = { styles.formp }>
-            <form className="form-group border rounded shadow p-3 mb-5 bg-body rounded mb-3" onSubmit={submitHandler}>
+        <div className={styles.formp}>
+            <form className="form-group border rounded shadow p-3 mb-5 bg-body rounded mb-3" onSubmit={submitHandler} responsive>
                 <div className={styles.pad}>
-                    <h5>Add new product:</h5>
+                    <h5>Add New Product:</h5>
                     <label className = {styles.labels} htmlFor="name">Name:</label>
                     <input className="form-control" type="text" required id="name" ref={nameInputRef} /> 
                     <label className={styles.labels} htmlFor="description">Description:</label>

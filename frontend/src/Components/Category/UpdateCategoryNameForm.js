@@ -50,8 +50,8 @@ function UpdateCategoryNameForm(props) {
   return (
     <div>
       <form onSubmit={submitHandler}>
-        <h2>Change name of category:</h2>
-        <label htmlFor="name">Category Name</label>
+        <h5>Change name of category:</h5>
+        <label htmlFor="name">Category Name: </label>
         <input type="text" onChange={() => setFeedbackAfterUpdating(null)} required id="name" ref={nameInputRef} />
         <Button
           className="ps-4 pe-4"

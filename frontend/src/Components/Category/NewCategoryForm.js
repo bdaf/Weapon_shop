@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import styles from "./CategoriesList.module.css";
 
 function NewCategoryForm(props) {
   const nameInputRef = useRef();
@@ -29,11 +30,15 @@ function NewCategoryForm(props) {
        //         </div>
        //     <br></br>
        // </div>
-        <div>
-            <form onSubmit={submitHandler}>
-                <label htmlFor="name">Category Name</label>
-                <input type="text" required id="name" ref={nameInputRef} />
-                <button>Add category</button>
+        <div className={styles.formp}>
+            <form className="form-group border rounded shadow p-3 mb-5 bg-body rounded mb-3" onSubmit={submitHandler}>
+                <h5>Add New Category:</h5>
+                <div className={styles.pad}>
+                <label htmlFor="name">Category Name:</label>
+                    <input className="form-control" type="text" required id="name" ref={nameInputRef} />
+                    <br></br>
+                    <button className="btn btn-dark">Add Category</button>
+                    </div>
             </form>
         </div>
   );

@@ -44,8 +44,9 @@ function CRUDiscountToCategory(props) {
   }, []);
 
   return (
-    <div className="m-3">
-      <h1>Details of category: {props.category.name}</h1>
+      <div className="m-3">
+          <br></br>
+      <h4>Details of Category: {props.category.name}</h4>
       <UpdateCategoryNameForm category = {props.category} onUpdateCategory={props.onUpdateCategory}/>
       <AddDiscountToCategory category = {props.category} fetchDiscountsOfSelectedCategory={fetchDiscountsOfSelectedCategory} allDiscountOptions = {allDiscountOptions}/>
       <DeleteDiscountFromCategory  category = {props.category} fetchDiscountsOfSelectedCategory={fetchDiscountsOfSelectedCategory} discountOfCategoryOptions={discountOfCategoryOptions}/>
