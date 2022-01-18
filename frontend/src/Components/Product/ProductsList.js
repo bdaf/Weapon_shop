@@ -11,7 +11,6 @@ function ProductsList(props) {
                     <th>Description</th>
                     <th>Price</th>
                     <th>Amount</th>
-                    <th>Photo URL</th>
                     <th>Category Name</th>
                     <th>Company Name</th>
                     <th>NIP</th>

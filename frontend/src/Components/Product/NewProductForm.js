@@ -44,7 +44,9 @@ function NewProductForm(props) {
 
     return (
         <div>
-            <form onSubmit={submitHandler}>
+            <br></br>
+
+            <form className="mb-3" onSubmit={submitHandler}>
                 <label htmlFor="name">Name:</label>
                 <input type="text" required id="name" ref={nameInputRef} /> <br></br>
                 <label htmlFor="description">Description:</label>
@@ -63,6 +65,8 @@ function NewProductForm(props) {
                 <input type="text" required id="nip" ref={nipInputRef} /><br></br>
                 <button>Add product</button>
             </form>
+            <br></br>
+
         </div>
     );
 }
