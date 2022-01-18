@@ -17,35 +17,36 @@ function Categories() {
       .post("/", { name: categoryData.name })
       .then(function (response) {
         if (response.status === 200) {
-          setFeedback(
-            <Alert variant="success">Category has been added!</Alert>
-          );
+          showFeedback("success", "Category has been added!");
           // get result data from http method
           const resultData = response.data;
           console.log(resultData)
           setLoadedCategories((prev) => [...prev, resultData]);
-        } else setFeedback(<Alert variant="danger">We couldn't add this category!</Alert>);
+        } else showFeedback("danger", "We couldn't add this category!") ;
       })
       .catch((e) => {
         console.log(e);
-        setFeedback(
-          <Alert variant="danger">
-            Error occured, propably this category already is in database! Try
-            with another one.
-          </Alert>
-        );
+        showFeedback("danger", "Error occured, propably this category already is in database! Try with another one.");
       });
   }
 
   const [isLoading, setIsLoading] = useState(true);
   const [loadedCategories, setLoadedCategories] = useState([]);
 
-  useEffect(() => {
-    api.get("/").then(function (response) {
+  const fetchAllCategories = async () => {
+    await api.get("/").then(function (response) {
       setIsLoading(false);
       setLoadedCategories(response.data);
     });
+  }
+
+  useEffect(() => {
+    fetchAllCategories();
   }, []);
+
+  const showFeedback  = function(typeOfFeedback, text){
+    setFeedback(<Alert variant={typeOfFeedback}>{text}</Alert>);
+  }
 
   if (isLoading) {
     return (
@@ -61,7 +62,8 @@ function Categories() {
       <h4>Add New Category:</h4>
       <NewCategoryForm onAddCategory={addCategoryHandler} />
       {feedback != null ? feedback : null}
-      <CategoriesList categories={loadedCategories} />
+      <CategoriesList categories={loadedCategories} updateCategories={fetchAllCategories} 
+      showFeedback={showFeedback}/>
     </div>
   );
 }

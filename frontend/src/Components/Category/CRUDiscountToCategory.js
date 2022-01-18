@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { Col, Row, FloatingLabel, Form, Button, Alert } from "react-bootstrap";
+import { Col, Row, Form, Button, Alert } from "react-bootstrap";
 import Select from "react-select";
 
 function AddDiscountToCategory(props) {
