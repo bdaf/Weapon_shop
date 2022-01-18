@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import AddDiscountToCategory from "./CRUDiscountToCategory";
+import CRUDiscountToCategory from "./CRUDiscountToCategory";
 
 function CategoryDetails() {
   const params = useParams();
@@ -28,7 +28,7 @@ function CategoryDetails() {
   return (
     <div>
       <h1>Details of category: {category.name}</h1>
-      <AddDiscountToCategory category={category} />
+      <CRUDiscountToCategory category={category} />
     </div>
   );
 }
