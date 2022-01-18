@@ -1,16 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { Col, Row, Form, Button, Alert } from "react-bootstrap";
-import Select from "react-select";
 import AddDiscountToCategory from "./AddDiscountToCategory";
+import DeleteDiscountFromCategory from "./DeleteDiscountFromCategory";
+import UpdateCategoryNameForm from "./UpdateCategoryNameForm";
 
 function CRUDiscountToCategory(props) {
- 
-  const [feedbackAfterDeleting, setFeedbackAfterDeleting] = useState(null);
   const [allDiscountOptions, setAllDiscountOptions] = useState([]);
-  const [discountToDelete, setDiscountToDelete] = useState({});
   const [discountOfCategoryOptions, setDiscountOfCategoryOptions] = useState([]);
 
+  // GET ALL DISCOUNTS METHOD
   const fetchAllDiscountsData = async () => {
     await axios.get("http://localhost:80/api/discounts").then((response) => {
       console.log("fetchAllDiscountsData()");
@@ -24,6 +22,7 @@ function CRUDiscountToCategory(props) {
     });
   };
 
+  // GET DISCOUNT FROM CATEGORY METHOD
   const fetchDiscountsOfSelectedCategory = async () => {
     await axios
       .get(`http://localhost:80/api/categories/${props.category.categoryId}`)
@@ -44,79 +43,12 @@ function CRUDiscountToCategory(props) {
     fetchDiscountsOfSelectedCategory();
   }, []);
 
-
-  const deleteDiscountFromCategoryHandler = async (e) => {
-    e.preventDefault();
-    console.log("usuwamy");
-    await axios
-      .delete(`http://localhost:80/api/categories/${props.category.categoryId}/discount`, {
-        data: {discountId: discountToDelete.discountId}
-      })
-      .then((response) => {
-        if (response.status === 200)
-          setFeedbackAfterDeleting(
-            <Alert variant="success">
-              Discount has been removed from category!
-            </Alert>
-          );
-        else
-        setFeedbackAfterDeleting(
-            <Alert variant="danger">
-              We couldn't remove this discount from category!
-            </Alert>
-          );
-        fetchDiscountsOfSelectedCategory();
-      })
-      .catch((e) => {
-        console.log(e);
-        setFeedbackAfterDeleting(
-          <Alert variant="danger">
-            Error occured, propably this discount already is removed from this category.
-            Try with another one.
-          </Alert>
-        );
-      });
-  }
-
-
-
-  const setDiscountToDeleteHandler = (e) => {
-    setFeedbackAfterDeleting(null);
-    setDiscountToDelete({ discountId: e.value });
-  };
-
-
-  const showFeedbackAfterDeleting = (typeOfAlert, text) => {
-    setFeedbackAfterDeleting(<Alert variant={typeOfAlert}>{text}</Alert>);
-  };
-
   return (
     <div className="m-3">
-      {/* <UpdateCategoryForm onUpdateCategory={}/> */}
-      <AddDiscountToCategory category = {props.category} fetchDiscountsOfSelectedCategory={fetchDiscountsOfSelectedCategory}
-      allDiscountOptions = {allDiscountOptions}/>
-      <h2>Delete discount from category:</h2>
-      <Form onSubmit={(e) => deleteDiscountFromCategoryHandler(e)}>
-        <Row className="mb-3">
-          <Col xs={12} md={12}>
-            <Select
-              onChange={(e) => setDiscountToDeleteHandler(e)}
-              options={discountOfCategoryOptions}
-              placeholder="Choose discount to delete it from category"
-            />
-          </Col>
-        </Row>
-        {feedbackAfterDeleting != null ? feedbackAfterDeleting : null}
-        <Button
-          className="ps-4 pe-4"
-          variant="outline-danger"
-          type="submit"
-          disabled={feedbackAfterDeleting == null ? false : true}
-        >
-          Delete discount from category
-        </Button>
-      </Form>
-
+      <h1>Details of category: {props.category.name}</h1>
+      <UpdateCategoryNameForm category = {props.category} onUpdateCategory={props.onUpdateCategory}/>
+      <AddDiscountToCategory category = {props.category} fetchDiscountsOfSelectedCategory={fetchDiscountsOfSelectedCategory} allDiscountOptions = {allDiscountOptions}/>
+      <DeleteDiscountFromCategory  category = {props.category} fetchDiscountsOfSelectedCategory={fetchDiscountsOfSelectedCategory} discountOfCategoryOptions={discountOfCategoryOptions}/>
     </div>
   );
 }

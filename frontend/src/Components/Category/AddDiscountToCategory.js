@@ -5,9 +5,8 @@ import Select from "react-select";
 
 function AddDiscountToCategory(props) {
     const [feedbackAfterAdding, setFeedbackAfterAdding] = useState(null);
-    const [allDiscountOptions, setAllDiscountOptions] = useState([]);
     const [discountToAdd, setDiscountToAdd] = useState({});
-    
+
     const showFeedbackAfterAdding = (typeOfAlert, text) => {
         setFeedbackAfterAdding(<Alert variant={typeOfAlert}>{text}</Alert>);
     }
@@ -40,7 +39,7 @@ function AddDiscountToCategory(props) {
         <Col xs={12} md={12}>
           <Select
             onChange={(e) => setDiscountToAddHandler(e)}
-            options={allDiscountOptions}
+            options={props.allDiscountOptions}
             placeholder="Choose discount to add it to category"
           />
         </Col>

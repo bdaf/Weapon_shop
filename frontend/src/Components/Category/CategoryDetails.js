@@ -9,7 +9,7 @@ function CategoryDetails() {
   const [category, setCategory] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const fetchCategories = async () => {
+  const fetchCategory = async () => {
     await axios
       .get(`http://localhost:80/api/categories/${params.id}`)
       .then((response) => {
@@ -19,8 +19,7 @@ function CategoryDetails() {
   };
 
   useEffect(() => {
-    fetchCategories();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    fetchCategory();
   }, []);
 
   if (!loading) return null;
@@ -28,7 +27,7 @@ function CategoryDetails() {
   return (
     <div>
       <h1>Details of category: {category.name}</h1>
-      <CRUDiscountToCategory category={category} />
+      <CRUDiscountToCategory category={category} onUpdateCategory={fetchCategory}/>
     </div>
   );
 }
