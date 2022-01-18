@@ -30,7 +30,6 @@ function AddDiscountToCategory(props){
     await axios
       .post(`http://localhost:80/api/categories/${props.category.categoryId}`, {discountId: discount.discountId})
       .then((response) => {
-        // props.onChange((prevState) => !prevState);
         if (response.status === 200)
           setFeedback(
             <Alert variant="success">Discount has been added to category!</Alert>

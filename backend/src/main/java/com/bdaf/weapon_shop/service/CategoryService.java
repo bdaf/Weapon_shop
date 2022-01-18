@@ -15,4 +15,6 @@ public interface CategoryService {
     Category findById(Long aCategoryId);
 
     Category saveDiscountToCategory(Long aCategoryId, Discount aDiscount);
+
+    Category saveCategoryAndIfAlreadyExistsThrowException(Category aCategory);
 }

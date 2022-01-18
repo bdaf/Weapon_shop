@@ -1,28 +1,39 @@
-import NewCategoryForm from "../Components/Category/NewCategoryForm";
 import { useState, useEffect } from "react";
-import CategoriesList from "../Components/Category/CategoriesList";
+import { Alert } from "react-bootstrap";
 import axios from "axios";
+import NewCategoryForm from "../Components/Category/NewCategoryForm";
+import CategoriesList from "../Components/Category/CategoriesList";
 
 const api = axios.create({
   baseURL: "http://localhost:80/api/categories",
 });
 
 function Categories() {
+  const [feedback, setFeedback] = useState(null);
+
   async function addCategoryHandler(categoryData) {
     // http POST method
     const res = api
       .post("/", { name: categoryData.name })
       .then(function (response) {
-        // get result data from http method
-        const resultData = response.data;
-        // check if there isn't one with same name
-        const theSameCategory = loadedCategories.find(
-          (cat) => cat.name == resultData.name
-        );
-        // adding locally category to site if condition above
-        if (theSameCategory == null) {
+        if (response.status === 200) {
+          setFeedback(
+            <Alert variant="success">Category has been added!</Alert>
+          );
+          // get result data from http method
+          const resultData = response.data;
+          console.log(resultData)
           setLoadedCategories((prev) => [...prev, resultData]);
-        }
+        } else setFeedback(<Alert variant="danger">We couldn't add this category!</Alert>);
+      })
+      .catch((e) => {
+        console.log(e);
+        setFeedback(
+          <Alert variant="danger">
+            Error occured, propably this category already is in database! Try
+            with another one.
+          </Alert>
+        );
       });
   }
 
@@ -45,10 +56,11 @@ function Categories() {
   }
 
   return (
-      <div>
-          <br></br>
+    <div>
+      <br></br>
       <h4>Add New Category:</h4>
       <NewCategoryForm onAddCategory={addCategoryHandler} />
+      {feedback != null ? feedback : null}
       <CategoriesList categories={loadedCategories} />
     </div>
   );

@@ -31,7 +31,7 @@ public class CategoryController {
 
     @PostMapping
     public Category saveCategory(@RequestBody Category aCategory) {
-        return categoryService.saveCategoryToDatabaseIfNotExists(aCategory);
+        return categoryService.saveCategoryAndIfAlreadyExistsThrowException(aCategory);
     }
 
     @PostMapping("/{id}")

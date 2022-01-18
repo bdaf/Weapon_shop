@@ -18,12 +18,18 @@ public class CategoryServiceImpl implements CategoryService{
         return categoryRepository.findCategoryByName(aName);
     }
 
+    // if category already was in database, thor exception
+    public Category saveCategoryAndIfAlreadyExistsThrowException(Category aCategory){
+        if(findCategoryByName(aCategory.getName()) != null){
+            throw new IllegalArgumentException("Category already exists: "+aCategory.getName());
+        }
+        return categoryRepository.save(aCategory);
+    }
+
     public Category saveCategoryToDatabaseIfNotExists(Category aCategory) {
         Category category = findCategoryByName(aCategory.getName());
-        if (category == null) {
-            category = categoryRepository.save(aCategory);
-        }
-        return category;
+        if (category != null) return categoryRepository.save(category);
+        return categoryRepository.save(aCategory);
     }
 
     @Override

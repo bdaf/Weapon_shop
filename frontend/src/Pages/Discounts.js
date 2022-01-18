@@ -24,16 +24,7 @@ function Discounts() {
           setFeedback(<Alert variant="success">Discount has been added!</Alert>);
           // get result data from http method
           const resultData = response.data;
-          // check if there isn't one with same name
-          const theSameDiscount = loadedDiscounts.find(
-            (dis) => dis.percent == resultData.percent &&
-            dis.fromDate == resultData.fromDate &&
-            dis.toDate == resultData.toDate
-          );
-          // adding locally discount to site if condition above
-          if (theSameDiscount == null) {
-            setLoadedDiscounts((prev) => [...prev, resultData]);
-          }
+          setLoadedDiscounts((prev) => [...prev, resultData]);
         } else
         setFeedback(<Alert variant="danger">We couldn't add this discount!</Alert>);
       })
@@ -41,7 +32,7 @@ function Discounts() {
         console.log(e);
         setFeedback(
           <Alert variant="danger">
-            Error occured, propably this discount already is in database. Try with another one.
+            Error occured, propably this discount already is in database or 'From' is gratest than 'To'. Try with another one.
           </Alert>
         );
       });
