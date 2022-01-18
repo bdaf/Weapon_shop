@@ -49,6 +49,9 @@ public class CategoryController {
         return "Discount with Id " + aDiscount.getDiscountId() + " has been deleted successfully!";
     }
 
- 
+    @PutMapping("/{id}")
+    public Category updateCategoryById(@PathVariable("id") Long aCategoryId, @RequestBody Category aCategory) {
+        return categoryService.updateCategoryById(aCategory, aCategoryId);
+    }
 
 }

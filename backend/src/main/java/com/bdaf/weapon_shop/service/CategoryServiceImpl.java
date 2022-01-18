@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -76,5 +77,21 @@ public class CategoryServiceImpl implements CategoryService{
     @Override
     public void deleteCategoryById(Long aCategoryId) {
         categoryRepository.deleteById(aCategoryId);
+    }
+
+    // update name of category
+    @Override
+    public Category updateCategoryById(Category aCategory, Long aCategoryId) {
+        Category resultCategory = categoryRepository.findById(aCategoryId).get();
+
+        // if category with that name already exists
+        if(categoryRepository.findCategoryByName(aCategory.getName()) != null)
+            throw new IllegalArgumentException("Name of this category already exists! Name: "+aCategory.getName());
+        
+        if (Objects.nonNull(aCategory.getName()) && !aCategory.getName().equalsIgnoreCase("")) {
+            resultCategory.setName(aCategory.getName());
+        }
+
+        return categoryRepository.save(resultCategory);
     }
 }

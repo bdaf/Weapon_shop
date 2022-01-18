@@ -21,4 +21,6 @@ public interface CategoryService {
     void deleteDiscountFromCategory(Long aCategoryId, Discount aDiscount);
 
     void deleteCategoryById(Long aCategoryId);
+
+    Category updateCategoryById(Category aCategory, Long aCategoryId);
 }
