@@ -22,4 +22,10 @@ public class DiscountController {
     public Discount saveDiscount(@RequestBody Discount aDiscount) {
         return discountService.saveDiscountToDatabaseIfNotExists(aDiscount);
     }
+
+    @DeleteMapping("/{id}")
+    public String deleteDiscountById(@PathVariable("id") Long aDiscountId){
+        discountService.deleteDiscountById(aDiscountId);
+        return "Discount with Id " + aDiscountId + " has been deleted successfully!";
+    }
 }

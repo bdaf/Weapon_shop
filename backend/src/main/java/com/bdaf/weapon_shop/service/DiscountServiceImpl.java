@@ -29,4 +29,9 @@ public class DiscountServiceImpl implements DiscountService {
             throw new IllegalArgumentException("FromDate in discount cannot be more late than toDate. FromDate: " + aDiscount.getFromDate() + " ToDate: " + aDiscount.getToDate());
         return discountRepository.save(aDiscount);
     }
+
+    @Override
+    public void deleteDiscountById(Long aDiscountId) {
+        discountRepository.deleteById(aDiscountId);
+    }
 }

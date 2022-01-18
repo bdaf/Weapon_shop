@@ -11,29 +11,31 @@ const api = axios.create({
 function Discounts() {
   const [feedback, setFeedback] = useState(null);
 
+  const showFeedback = (typeOfAlert, text) => {
+    setFeedback(<Alert variant={typeOfAlert}>{text}</Alert>);
+  };
+
   async function addDiscountHandler(discountData) {
     // http POST method
     const res = api
-      .post("/", { 
+      .post("/", {
         percent: discountData.percent,
         fromDate: discountData.fromDate,
-        toDate: discountData.toDate
-       })
+        toDate: discountData.toDate,
+      })
       .then(function (response) {
-        if (response.status === 200){
-          setFeedback(<Alert variant="success">Discount has been added!</Alert>);
+        if (response.status === 200) {
+          showFeedback("success", "Discount has been added!");
           // get result data from http method
           const resultData = response.data;
           setLoadedDiscounts((prev) => [...prev, resultData]);
-        } else
-        setFeedback(<Alert variant="danger">We couldn't add this discount!</Alert>);
+        } else showFeedback("danger", "We couldn't add this discount!");
       })
       .catch((e) => {
         console.log(e);
-        setFeedback(
-          <Alert variant="danger">
-            Error occured, propably this discount already is in database or 'From' is gratest than 'To'. Try with another one.
-          </Alert>
+        showFeedback(
+          "danger",
+          "Error occured, propably this discount already is in database or 'From' is gratest than 'To'. Try with another one."
         );
       });
   }
@@ -41,11 +43,15 @@ function Discounts() {
   const [isLoading, setIsLoading] = useState(true);
   const [loadedDiscounts, setLoadedDiscounts] = useState([]);
 
-  useEffect(() => {
+  function fetchAllDiscounts() {
     api.get("/").then(function (response) {
       setIsLoading(false);
       setLoadedDiscounts(response.data);
     });
+  }
+
+  useEffect(() => {
+    fetchAllDiscounts();
   }, []);
 
   if (isLoading) {
@@ -60,10 +66,14 @@ function Discounts() {
     <div>
       <h1>Discounts</h1>
       <h1>Add new discount:</h1>
-      
+
       <NewDiscountForm onAddDiscount={addDiscountHandler} />
-      {feedback != null ? feedback : null }
-      <DiscountsList discounts={loadedDiscounts} />
+      {feedback != null ? feedback : null}
+      <DiscountsList
+        discounts={loadedDiscounts}
+        updateDiscounts={fetchAllDiscounts}
+        showFeedback={showFeedback}
+      />
     </div>
   );
 }

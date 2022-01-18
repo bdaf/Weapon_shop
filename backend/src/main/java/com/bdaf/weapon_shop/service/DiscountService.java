@@ -8,4 +8,6 @@ public interface DiscountService {
     List<Discount> findAllDiscounts();
 
     Discount saveDiscountToDatabaseIfNotExists(Discount aDiscount);
+
+    void deleteDiscountById(Long aDiscountId);
 }

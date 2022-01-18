@@ -11,7 +11,7 @@ function DiscountsList(props) {
         {props.discounts.map((discount) => {
             return (
                 <Col xs={4} key={discount.discountId} className={styles.cardCenter} bg={"Light"}>
-              <DiscountCard discount={discount} />
+              <DiscountCard discount={discount} updateDiscounts={props.updateDiscounts} showFeedback={props.showFeedback} />
             </Col>
           );
         })}
