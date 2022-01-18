@@ -70,5 +70,6 @@ public class CategoryServiceImpl implements CategoryService{
         Optional<Discount> discountToDelete = category.getDiscounts().stream().filter(d -> d.getDiscountId() == discount.getDiscountId()).findAny();
         if(discountToDelete.isEmpty()) throw new IllegalArgumentException("This discount is already deleted or missing in this category. Category ID: " + aCategoryId+", Discount ID: "+aDiscount.getDiscountId());
         category.getDiscounts().remove(discountToDelete.get());
+        categoryRepository.save(category);
     }
 }

@@ -72,14 +72,43 @@ function AddDiscountToCategory(props) {
         setFeedbackAfterAdding(
           <Alert variant="danger">
             Error occured, propably this discount already is in this category.
-            Try with other one.
+            Try with another one.
           </Alert>
         );
       });
   };
 
   const deleteDiscountFromCategoryHandler = async (e) => {
+    e.preventDefault();
     console.log("usuwamy");
+    await axios
+      .delete(`http://localhost:80/api/categories/${props.category.categoryId}`, {
+        data: {discountId: discountToDelete.discountId}
+      })
+      .then((response) => {
+        if (response.status === 200)
+          setFeedbackAfterDeleting(
+            <Alert variant="success">
+              Discount has been removed from category!
+            </Alert>
+          );
+        else
+        setFeedbackAfterDeleting(
+            <Alert variant="danger">
+              We couldn't remove this discount from category!
+            </Alert>
+          );
+        fetchDiscountsOfSelectedCategory();
+      })
+      .catch((e) => {
+        console.log(e);
+        setFeedbackAfterDeleting(
+          <Alert variant="danger">
+            Error occured, propably this discount already is removed from this category.
+            Try with another one.
+          </Alert>
+        );
+      });
   }
 
   const setDiscountToAddHandler = (e) => {
@@ -94,28 +123,7 @@ function AddDiscountToCategory(props) {
 
   return (
     <div className="m-3">
-      <h2>Discounts of this category from database:</h2>
-      <Form onSubmit={(e) => deleteDiscountFromCategoryHandler(e)}>
-        <Row className="mb-3">
-          <Col xs={12} md={12}>
-            <Select
-              onChange={(e) => setDiscountToDeleteHandler(e)}
-              options={discountOfCategoryOptions}
-              placeholder="Choose discount to delete it from category"
-            />
-          </Col>
-        </Row>
-        {feedbackAfterDeleting != null ? feedbackAfterDeleting : null}
-        <Button
-          className="ps-4 pe-4"
-          variant="outline-danger"
-          type="submit"
-          disabled={feedbackAfterDeleting == null ? false : true}
-        >
-          Delete discount from category
-        </Button>
-      </Form>
-      <h2>All discounts from database:</h2>
+      <h2>Add discount to:</h2>
       <Form onSubmit={(e) => addDiscountToCategoryHandler(e)}>
         <Row className="mb-3">
           <Col xs={12} md={12}>
@@ -136,6 +144,29 @@ function AddDiscountToCategory(props) {
           Add discount to category
         </Button>
       </Form>
+
+      <h2>Delete discount from category:</h2>
+      <Form onSubmit={(e) => deleteDiscountFromCategoryHandler(e)}>
+        <Row className="mb-3">
+          <Col xs={12} md={12}>
+            <Select
+              onChange={(e) => setDiscountToDeleteHandler(e)}
+              options={discountOfCategoryOptions}
+              placeholder="Choose discount to delete it from category"
+            />
+          </Col>
+        </Row>
+        {feedbackAfterDeleting != null ? feedbackAfterDeleting : null}
+        <Button
+          className="ps-4 pe-4"
+          variant="outline-danger"
+          type="submit"
+          disabled={feedbackAfterDeleting == null ? false : true}
+        >
+          Delete discount from category
+        </Button>
+      </Form>
+
     </div>
   );
 }
