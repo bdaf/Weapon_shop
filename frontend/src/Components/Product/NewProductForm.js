@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import styles from "./ProductsList.module.css";
 
 function NewProductForm(props) {
 
@@ -43,29 +44,30 @@ function NewProductForm(props) {
     }
 
     return (
-        <div>
-            <br></br>
-
-            <form className="mb-3" onSubmit={submitHandler}>
-                <label htmlFor="name">Name:</label>
-                <input type="text" required id="name" ref={nameInputRef} /> <br></br>
-                <label htmlFor="description">Description:</label>
-                <input type="text" required id="description" ref={descriptionInputRef} /><br></br>
-                <label htmlFor="price">Price:</label>
-                <input type="number" required id="price" ref={priceInputRef} /><br></br>
-                <label htmlFor="amount">Amount:</label>
-                <input type="number" required id="amount" ref={amountInputRef} /><br></br>
-                <label htmlFor="photoUrl">Photo URL:</label>
-                <input type="url" required id="photoUrl" ref={photoUrlInputRef} /><br></br>
-                <label htmlFor="nameCategory">Category Name:</label>
-                <input type="text" required id="category" ref={categoryInputRef} /><br></br>
-                <label htmlFor="companyName">Company Name:</label>
-                <input type="text" required id="companyName" ref={companyNameInputRef} /><br></br>
-                <label htmlFor="nip">NIP:</label>
-                <input type="text" required id="nip" ref={nipInputRef} /><br></br>
-                <button>Add product</button>
+        <div className = { styles.formp }>
+            <form className="form-group border rounded shadow p-3 mb-5 bg-body rounded mb-3" onSubmit={submitHandler}>
+                <div className={styles.pad}>
+                    <h5>Add new product:</h5>
+                    <label className = {styles.labels} htmlFor="name">Name:</label>
+                    <input className="form-control" type="text" required id="name" ref={nameInputRef} /> 
+                    <label className={styles.labels} htmlFor="description">Description:</label>
+                    <input className="form-control" type="text" required id="description" ref={descriptionInputRef} />
+                    <label className={styles.labels} htmlFor="price">Price:</label>
+                    <input className="form-control" type="number" required id="price" ref={priceInputRef} />
+                    <label className={styles.labels} htmlFor="amount">Amount:</label>
+                    <input className="form-control" type="number" required id="amount" ref={amountInputRef} />
+                    <label className={styles.labels} htmlFor="photoUrl">Photo URL:</label>
+                    <input className="form-control" type="url" required id="photoUrl" ref={photoUrlInputRef} />
+                    <label className={styles.labels} htmlFor="nameCategory">Category Name:</label>
+                    <input className="form-control" type="text" required id="category" ref={categoryInputRef} />
+                    <label className={styles.labels} htmlFor="companyName">Company Name:</label>
+                    <input className="form-control" type="text" required id="companyName" ref={companyNameInputRef} />
+                    <label className={styles.labels} htmlFor="nip">NIP:</label>
+                    <input className="form-control" type="text" required id="nip" ref={nipInputRef} />
+                    <br></br>
+                    <button className="btn btn-dark">Add product</button>
+                </div>
             </form>
-            <br></br>
 
         </div>
     );

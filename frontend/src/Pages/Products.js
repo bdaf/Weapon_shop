@@ -3,6 +3,8 @@ import { Alert } from "react-bootstrap";
 import axios from "axios";
 import NewProductForm from "../Components/Product/NewProductForm";
 import ProductsList from "../Components/Product/ProductsList";
+import styles from "../Components/Product/ProductsList.module.css";
+
 
 const api = axios.create({
   baseURL: "http://localhost:80/api/products",
@@ -73,11 +75,11 @@ function Products(props) {
   }
 
   return (
-    <div>
-      <h1>Products</h1>
-      <h1>Add new product:</h1>
+      <div>
+          <br></br>
+      <h2>Products</h2>
       <NewProductForm onAddProduct={addProductHandler} />
-      {feedback != null ? feedback : null}
+          <div className={styles.alerts}> {feedback != null ? feedback : null} </div>
       <ProductsList products={loadedProducts} />
     </div>
   );

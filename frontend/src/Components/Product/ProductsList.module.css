@@ -1,0 +1,26 @@
+.formp{
+    text-align:center;
+    margin-left:35%;
+    margin-right:35%;
+    padding:2%;
+}
+
+.pad {
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top:2%;
+}
+
+.labels {
+    padding-top:1%;
+}
+
+.width {
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.alerts {
+    margin-left: 15%;
+    margin-right: 15%;
+}

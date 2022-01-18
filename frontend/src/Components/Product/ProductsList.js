@@ -1,10 +1,12 @@
 import ProductCard from "./ProductCard";
 import { Table } from "react-bootstrap";
+import styles from "./ProductsList.module.css";
+
 
 function ProductsList(props) {
   return (
-      <div>
-          <Table stripped bordered hover variant="dark" className="table-responsive-sm">
+      <div className={styles.width} >
+          <Table stripped bordered hover variant="dark" className="table-responsive-sm form-group border rounded shadow p-3 mb-5 bg-body rounded mb-3">
           <thead>
               <tr>
                     <th>Name</th>
