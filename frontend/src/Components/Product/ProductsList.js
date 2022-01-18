@@ -16,6 +16,7 @@ function ProductsList(props) {
                     <th>Category Name</th>
                     <th>Company Name</th>
                     <th>NIP</th>
+                    <th>Delete</th>
               </tr>
           </thead>
         {props.products.map((product) => {
