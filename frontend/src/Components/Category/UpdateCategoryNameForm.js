@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
-import { Col, Row, Form, Button, Alert } from "react-bootstrap";
+import {Button, Alert } from "react-bootstrap";
 
 function UpdateCategoryNameForm(props) {
   const [feedbackAfterUpdating, setFeedbackAfterUpdating] = useState(null);
@@ -20,10 +20,13 @@ function UpdateCategoryNameForm(props) {
       name: enteredName,
     };
 
-    console.log("updating");
+    console.log(categoryData);
     axios
       .put(`http://localhost:80/api/categories/${props.category.categoryId}`, {
-        data: { categoryId: categoryData.categoryId, name: categoryData.name },
+ 
+          categoryId: categoryData.categoryId,
+          name: categoryData.name 
+
       })
       .then((response) => {
         if (response.status === 200)
@@ -33,7 +36,7 @@ function UpdateCategoryNameForm(props) {
             "danger",
             "We couldn't update this category!"
           );
-        props.fetchDiscountsOfSelectedCategory();
+          props.onUpdateCategory(categoryData);
       })
       .catch((e) => {
         console.log(e);
@@ -42,8 +45,6 @@ function UpdateCategoryNameForm(props) {
           "Error occured, Try with another one or later."
         );
       });
-
-    props.onUpdateCategory(categoryData);
   }
 
   return (
@@ -51,15 +52,13 @@ function UpdateCategoryNameForm(props) {
       <form onSubmit={submitHandler}>
         <h2>Change name of category:</h2>
         <label htmlFor="name">Category Name</label>
-        <input type="text" required id="name" ref={nameInputRef} />
+        <input type="text" onChange={() => setFeedbackAfterUpdating(null)} required id="name" ref={nameInputRef} />
         <Button
           className="ps-4 pe-4"
           variant="outline-warning"
           type="submit"
           disabled={feedbackAfterUpdating == null ? false : true}
-        >
-          Update category
-        </Button>{" "}
+        >Update category</Button>{" "}
         {feedbackAfterUpdating != null ? feedbackAfterUpdating : null}
       </form>
     </div>

@@ -26,7 +26,7 @@ function CategoryDetails() {
 
   return (
     <div>
-      <h1>Details of category: {category.name}</h1>
+      {/* <h1>Details of category: {category.name}</h1> */}
       <CRUDiscountToCategory category={category} onUpdateCategory={fetchCategory}/>
     </div>
   );
