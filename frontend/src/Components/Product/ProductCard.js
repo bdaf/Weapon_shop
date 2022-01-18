@@ -4,7 +4,7 @@ function ProductCard(props) {
         <tr>
             <td>{props.product.name}</td>
             <td>{props.product.description}</td>
-            <td>{props.product.price}</td>
+            <td>{props.product.price.toFixed(2)}</td>
             <td>{props.product.amount}</td>
             <td>{props.product.category.name}</td>
             <td>{props.product.producer.companyName}</td>
