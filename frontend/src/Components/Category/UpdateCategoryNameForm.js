@@ -1,6 +1,8 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
-import {Button, Alert } from "react-bootstrap";
+import { Button, Alert } from "react-bootstrap";
+import styles from "./CategoriesList.module.css";
+
 
 function UpdateCategoryNameForm(props) {
   const [feedbackAfterUpdating, setFeedbackAfterUpdating] = useState(null);
@@ -50,17 +52,20 @@ function UpdateCategoryNameForm(props) {
   return (
     <div>
       <form onSubmit={submitHandler}>
-        <h2>Change name of category:</h2>
-        <label htmlFor="name">Category Name</label>
-        <input type="text" onChange={() => setFeedbackAfterUpdating(null)} required id="name" ref={nameInputRef} />
-        <Button
+        <h5>Change name of Category:</h5>
+              <label htmlFor="name">Category Name: </label>
+              <div className={styles.imargin}>
+              <input className="form-control" type="text" onChange={() => setFeedbackAfterUpdating(null)} required id="name" ref={nameInputRef} />
+                  </div>
+                  <Button
           className="ps-4 pe-4"
           variant="outline-warning"
           type="submit"
           disabled={feedbackAfterUpdating == null ? false : true}
         >Update category</Button>{" "}
         {feedbackAfterUpdating != null ? feedbackAfterUpdating : null}
-      </form>
+          </form>
+          <br></br>
     </div>
   );
 }

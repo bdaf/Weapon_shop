@@ -3,6 +3,8 @@ import axios from "axios";
 import AddDiscountToCategory from "./AddDiscountToCategory";
 import DeleteDiscountFromCategory from "./DeleteDiscountFromCategory";
 import UpdateCategoryNameForm from "./UpdateCategoryNameForm";
+import styles from "./CategoriesList.module.css";
+
 
 function CRUDiscountToCategory(props) {
   const [allDiscountOptions, setAllDiscountOptions] = useState([]);
@@ -43,13 +45,21 @@ function CRUDiscountToCategory(props) {
     fetchDiscountsOfSelectedCategory();
   }, []);
 
-  return (
-    <div className="m-3">
-      <h1>Details of category: {props.category.name}</h1>
-      <UpdateCategoryNameForm category = {props.category} onUpdateCategory={props.onUpdateCategory}/>
-      <AddDiscountToCategory category = {props.category} fetchDiscountsOfSelectedCategory={fetchDiscountsOfSelectedCategory} allDiscountOptions = {allDiscountOptions}/>
-      <DeleteDiscountFromCategory  category = {props.category} fetchDiscountsOfSelectedCategory={fetchDiscountsOfSelectedCategory} discountOfCategoryOptions={discountOfCategoryOptions}/>
-    </div>
+    return (
+        <div>
+            <br></br>
+            <h2>Details of Category: {props.category.name}</h2>
+            <br></br>
+        <div className={styles.padding}>
+          <div className="m-3" className="form-group border rounded shadow p-3 mb-5 bg-body rounded mb-3">
+                <div className={styles.padding2}>
+                  <UpdateCategoryNameForm category = {props.category} onUpdateCategory={props.onUpdateCategory}/>
+                  <AddDiscountToCategory category = {props.category} fetchDiscountsOfSelectedCategory={fetchDiscountsOfSelectedCategory} allDiscountOptions = {allDiscountOptions}/>
+                  <DeleteDiscountFromCategory  category = {props.category} fetchDiscountsOfSelectedCategory={fetchDiscountsOfSelectedCategory} discountOfCategoryOptions={discountOfCategoryOptions}/>
+                </div>
+          </div>
+        </div>
+       </div>
   );
 }
 

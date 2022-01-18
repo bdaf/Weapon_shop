@@ -34,7 +34,7 @@ function AddDiscountToCategory(props) {
 
   return (
     <Form onSubmit={(e) => addDiscountToCategoryHandler(e)}>
-      <h2>Add discount to:</h2>
+      <h5>Add Discount to:</h5>
       <Row className="mb-3">
         <Col xs={12} md={12}>
           <Select

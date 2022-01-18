@@ -9,6 +9,7 @@ function ProductCard(props) {
             <td>{props.product.category.name}</td>
             <td>{props.product.producer.companyName}</td>
             <td>{props.product.producer.nip}</td>
+            <td><button type="button" class="btn btn-outline-light">Delete</button></td>
         </tr>
   );
 }

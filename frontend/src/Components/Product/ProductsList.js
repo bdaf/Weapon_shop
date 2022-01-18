@@ -6,7 +6,7 @@ import styles from "./ProductsList.module.css";
 function ProductsList(props) {
   return (
       <div className={styles.width} >
-          <Table stripped bordered hover variant="dark" className="table-responsive-sm form-group border rounded shadow p-3 mb-5 bg-body rounded mb-3">
+          <Table stripped bordered hover variant="dark" className="table-responsive-sm" responsive>
           <thead>
               <tr>
                     <th>Name</th>
@@ -16,6 +16,7 @@ function ProductsList(props) {
                     <th>Category Name</th>
                     <th>Company Name</th>
                     <th>NIP</th>
+                    <th>Delete</th>
               </tr>
           </thead>
         {props.products.map((product) => {

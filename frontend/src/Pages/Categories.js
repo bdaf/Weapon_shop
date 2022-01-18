@@ -3,6 +3,7 @@ import { Alert } from "react-bootstrap";
 import axios from "axios";
 import NewCategoryForm from "../Components/Category/NewCategoryForm";
 import CategoriesList from "../Components/Category/CategoriesList";
+import styles from "../Components/Category/CategoriesList.module.css";
 
 const api = axios.create({
   baseURL: "http://localhost:80/api/categories",
@@ -58,10 +59,10 @@ function Categories() {
 
   return (
     <div>
-      <br></br>
-      <h4>Add New Category:</h4>
+          <br></br>
+          <h2>Categories</h2>
       <NewCategoryForm onAddCategory={addCategoryHandler} />
-      {feedback != null ? feedback : null}
+          <div className={styles.alerts}> {feedback != null ? feedback : null}</div>
       <CategoriesList categories={loadedCategories} updateCategories={fetchAllCategories} 
       showFeedback={showFeedback}/>
     </div>
