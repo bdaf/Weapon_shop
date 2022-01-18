@@ -27,7 +27,7 @@ function CategoryDetails() {
 
   return (
     <div>
-      <h1>{category.name}</h1>
+      <h1>Details of category: {category.name}</h1>
       <AddDiscountToCategory category={category} />
     </div>
   );

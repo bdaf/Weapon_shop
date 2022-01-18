@@ -3,82 +3,141 @@ import axios from "axios";
 import { Col, Row, FloatingLabel, Form, Button, Alert } from "react-bootstrap";
 import Select from "react-select";
 
-function AddDiscountToCategory(props){
+function AddDiscountToCategory(props) {
+  const [feedbackAfterAdding, setFeedbackAfterAdding] = useState(null);
+  const [feedbackAfterDeleting, setFeedbackAfterDeleting] = useState(null);
+  const [discountToAdd, setDiscountToAdd] = useState({});
+  const [discountToDelete, setDiscountToDelete] = useState({});
+  const [allDiscountOptions, setAllDiscountOptions] = useState([]);
+  const [discountOfCategoryOptions, setDiscountOfCategoryOptions] = useState(
+    []
+  );
 
-  const [feedback, setFeedback] = useState(null);
-  const [discount, setDiscount] = useState({});
-  const [discountOptions, setDiscountOptions] = useState([]);
-
-  const fetchDate = async () => {
+  const fetchAllDiscountsData = async () => {
     await axios.get("http://localhost:80/api/discounts").then((response) => {
-      console.log("fetchDate()");
+      console.log("fetchAllDiscountsData()");
       const discountOptions = response.data.map((d) => {
-          const discountLabel = (d.percent*100)+'% - From: '+ d.fromDate + ', To: ' + d.toDate;
+        const discountLabel =
+          d.percent * 100 + "% - From: " + d.fromDate + ", To: " + d.toDate;
         return { value: d.discountId, label: discountLabel };
       });
-      setDiscountOptions(discountOptions);
+      setAllDiscountOptions(discountOptions);
       console.log(discountOptions);
     });
   };
 
+  const fetchDiscountsOfSelectedCategory = async () => {
+    await axios
+      .get(`http://localhost:80/api/categories/${props.category.categoryId}`)
+      .then((response) => {
+        console.log("fetchDiscountsOfSelectedCategory()");
+        const discountOptions = response.data.discounts.map((d) => {
+          const discountLabel =
+            d.percent * 100 + "% - From: " + d.fromDate + ", To: " + d.toDate;
+          return { value: d.discountId, label: discountLabel };
+        });
+        setDiscountOfCategoryOptions(discountOptions);
+        console.log(discountOptions);
+      });
+  };
+
   useEffect(() => {
-    fetchDate();
+    fetchAllDiscountsData();
+    fetchDiscountsOfSelectedCategory();
   }, []);
 
   const addDiscountToCategoryHandler = async (e) => {
     e.preventDefault();
     await axios
-      .post(`http://localhost:80/api/categories/${props.category.categoryId}`, {discountId: discount.discountId})
+      .post(`http://localhost:80/api/categories/${props.category.categoryId}`, {
+        discountId: discountToAdd.discountId,
+      })
       .then((response) => {
         if (response.status === 200)
-          setFeedback(
-            <Alert variant="success">Discount has been added to category!</Alert>
+          setFeedbackAfterAdding(
+            <Alert variant="success">
+              Discount has been added to category!
+            </Alert>
           );
         else
-          setFeedback(
-            <Alert variant="danger">We couldn't add this discount to category!</Alert>
+        setFeedbackAfterAdding(
+            <Alert variant="danger">
+              We couldn't add this discount to category!
+            </Alert>
           );
+        fetchDiscountsOfSelectedCategory();
       })
       .catch((e) => {
         console.log(e);
-
-        setFeedback(
+        setFeedbackAfterAdding(
           <Alert variant="danger">
-            Error occured, propably this discount already is in this category. Try with other one.
+            Error occured, propably this discount already is in this category.
+            Try with other one.
           </Alert>
         );
       });
   };
 
-  const setDiscountsHandler = (e) => {
-    setFeedback(null);
-    setDiscount({discountId: e.value});
+  const deleteDiscountFromCategoryHandler = async (e) => {
+    console.log("usuwamy");
+  }
+
+  const setDiscountToAddHandler = (e) => {
+    setFeedbackAfterAdding(null);
+    setDiscountToAdd({ discountId: e.value });
   };
+
+  const setDiscountToDeleteHandler = (e) => {
+    setFeedbackAfterDeleting(null);
+    setDiscountToDelete({ discountId: e.value });
+  };
+
   return (
     <div className="m-3">
+      <h2>Discounts of this category from database:</h2>
+      <Form onSubmit={(e) => deleteDiscountFromCategoryHandler(e)}>
+        <Row className="mb-3">
+          <Col xs={12} md={12}>
+            <Select
+              onChange={(e) => setDiscountToDeleteHandler(e)}
+              options={discountOfCategoryOptions}
+              placeholder="Choose discount to delete it from category"
+            />
+          </Col>
+        </Row>
+        {feedbackAfterDeleting != null ? feedbackAfterDeleting : null}
+        <Button
+          className="ps-4 pe-4"
+          variant="outline-danger"
+          type="submit"
+          disabled={feedbackAfterDeleting == null ? false : true}
+        >
+          Delete discount from category
+        </Button>
+      </Form>
       <h2>All discounts from database:</h2>
       <Form onSubmit={(e) => addDiscountToCategoryHandler(e)}>
         <Row className="mb-3">
           <Col xs={12} md={12}>
             <Select
-              onChange={(e) => setDiscountsHandler(e)}
-              options={discountOptions}
+              onChange={(e) => setDiscountToAddHandler(e)}
+              options={allDiscountOptions}
               placeholder="Choose discount to add it to category"
             />
           </Col>
         </Row>
-        {feedback != null ? feedback : null }
+        {feedbackAfterAdding != null ? feedbackAfterAdding : null}
         <Button
           className="ps-4 pe-4"
-          variant="outline-danger"
+          variant="outline-dark"
           type="submit"
-          disabled={feedback == null ? false : true}
+          disabled={feedbackAfterAdding == null ? false : true}
         >
           Add discount to category
         </Button>
       </Form>
     </div>
   );
-};
+}
 
 export default AddDiscountToCategory;

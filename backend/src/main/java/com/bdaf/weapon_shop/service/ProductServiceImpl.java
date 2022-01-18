@@ -121,8 +121,8 @@ public class ProductServiceImpl implements ProductService {
             theBiggestDiscount = discounts.get(i);
         }
         if (theBiggestDiscount != null) {
-            Float priceAfterBiggestDiscount = (float) (product.getPrice() * (1 - theBiggestDiscount.getPercent()));
-            product.setPrice(Double.valueOf(priceAfterBiggestDiscount));
+            Double priceAfterBiggestDiscount =product.getPrice() * (1 - theBiggestDiscount.getPercent());
+            product.setPrice(Math.round(priceAfterBiggestDiscount*100)/100.0);
         }
         return product;
     }
