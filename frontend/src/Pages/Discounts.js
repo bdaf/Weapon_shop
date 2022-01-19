@@ -33,6 +33,7 @@ function Discounts() {
           // get result data from http method
           const resultData = response.data;
           setLoadedDiscounts((prev) => [...prev, resultData]);
+          fetchAllDiscounts();
         } else showFeedback("danger", "We couldn't add this discount!");
       })
       .catch((e) => {
@@ -85,8 +86,6 @@ function Discounts() {
           <br></br>
           <h2>Discounts</h2>
           <br></br>
-      
-          
           <big className={styles.marginn} >Sort by:</big>{' '}
               <button  className = {`${styles.marginn} btn btn-dark`} onClick={() => updateSortType("order/percent/asc")}>Percent</button>{' '}
               <button className={`${styles.marginn} btn btn-dark`} onClick={() => updateSortType("order/percent/desc")}>Percent desc</button>{' '}
@@ -95,7 +94,7 @@ function Discounts() {
               <button className={`${styles.marginn} btn btn-dark`} onClick={() => updateSortType("order/to/asc")}>To date</button>{' '}
               <button className={`${styles.marginn} btn btn-dark`} onClick={() => updateSortType("order/to/desc")}>To date desc</button>
               <input className={`${styles.marginn} ${styles.input}`} type="text" placeholder="Search Discount" required id="filter" onChange={(e) => filterProducts(e)} />
-              <NewDiscountForm onAddDiscount={addDiscountHandler} />
+              <NewDiscountForm onAddDiscount={addDiscountHandler} updateDiscounts={fetchAllDiscounts} />
               <div className={styles.imargin}>{feedback != null ? feedback : null}</div>
       <DiscountsList
         discounts={loadedFilteredDiscounts}
