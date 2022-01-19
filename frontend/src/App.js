@@ -4,6 +4,8 @@ import "bootstrap/dist/js/bootstrap";
 import {Route, Routes} from 'react-router-dom';
 
 import Products from './Pages/Products';
+import ProductsBuy from './Pages/ProductsBuy';
+import Main from './Pages/Main';
 import Orders from './Pages/Orders';
 import Discounts from './Pages/Discounts';
 import CustomNavbar from './Components/layout/CustomNavbar';
@@ -20,6 +22,8 @@ function App() {
           <Route path='/discounts' element={<Discounts />} />
           <Route path='/products' element={<Products />} />
           <Route path='/orders' element={<Orders />} />
+          <Route path="/main" element={<Main />} />
+          <Route path="/productsbuy" element={<ProductsBuy />} />
         </Routes>
       </div>
   );

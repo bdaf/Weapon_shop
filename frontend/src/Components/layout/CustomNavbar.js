@@ -8,7 +8,7 @@ function CustomNavbar() {
     <Navbar bg="dark" variant="dark" className={styles.customNavbar}>
       <Container>
         <Navbar.Brand>
-          <Link to="products" className="link-light">
+          <Link to="main" className="link-light">
             <MDBIcon icon="hammer" style={{ marginRight: "10px" }} /> Weaponshop
           </Link>
         </Navbar.Brand>
