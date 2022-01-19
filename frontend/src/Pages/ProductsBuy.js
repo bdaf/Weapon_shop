@@ -40,7 +40,11 @@ function ProductsBuy(props) {
   return (
     <div>
       <br></br>
-      <h2>Products for you to buy!</h2>
+          <h2>Products for you to Buy!</h2>
+          <div className={styles.filter}>
+              <input className={styles.input} type="text" required id="filter" />
+              <button className="btn btn-dark">Filter</button>
+              </div>
       <ProductsList
         products={loadedProducts}
         updateProducts={fetchAllProducts}

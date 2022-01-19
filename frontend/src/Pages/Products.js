@@ -84,7 +84,7 @@ function Products(props) {
       <div className={styles.alerts}>
         {" "}
         {feedback != null ? feedback : null}{" "}
-      </div>
+          </div>
       <ProductsList
         products={loadedProducts}
         updateProducts={fetchAllProducts}
