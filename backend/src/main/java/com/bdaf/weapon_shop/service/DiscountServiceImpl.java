@@ -5,6 +5,7 @@ import com.bdaf.weapon_shop.repository.DiscountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.List;
 
 @Service
@@ -28,7 +29,7 @@ public class DiscountServiceImpl implements DiscountService {
         if (discount != null)
             throw new IllegalArgumentException("This discount already is in database! Percent: " + aDiscount.getPercent() + ", From: " + aDiscount.getFromDate() + ", To: " + aDiscount.getToDate());
         if (aDiscount.getFromDate().getTime() > aDiscount.getToDate().getTime())
-            throw new IllegalArgumentException("FromDate in discount cannot be more late than toDate. FromDate: " + aDiscount.getFromDate() + " ToDate: " + aDiscount.getToDate());
+            throwExceptionBecauseOfGreaterFromDateThanToDate(aDiscount.getFromDate(), aDiscount.getToDate());
         return discountRepository.save(aDiscount);
     }
 
@@ -70,11 +71,21 @@ public class DiscountServiceImpl implements DiscountService {
     @Override
     public Discount updateDiscountById(Long aDiscountId, Discount aDiscount) {
         Discount discountToChange = discountRepository.findById(aDiscountId).get();
-
+        Date fromDate = aDiscount.getFromDate();
+        Date toDate = aDiscount.getToDate();
+        // update
         if(aDiscount.getPercent() != null) discountToChange.setPercent(aDiscount.getPercent());
-        if(aDiscount.getFromDate() != null) discountToChange.setFromDate(aDiscount.getFromDate());
-        if(aDiscount.getToDate() != null) discountToChange.setToDate(aDiscount.getToDate());
+        if(fromDate != null) discountToChange.setFromDate(fromDate);
+        if(toDate != null) discountToChange.setToDate(toDate);
+
+        // throw exception if fromDate is greater than toDate
+        if(discountToChange.getFromDate().getTime() > discountToChange.getToDate().getTime())
+            throwExceptionBecauseOfGreaterFromDateThanToDate(discountToChange.getFromDate(), discountToChange.getToDate());
 
         return discountRepository.save(discountToChange);
+    }
+
+    private Discount throwExceptionBecauseOfGreaterFromDateThanToDate(Date aFromDate, Date aToDate) {
+        throw new IllegalArgumentException("FromDate in discount cannot be more late than toDate. FromDate: " + aFromDate + " ToDate: " + aToDate);
     }
 }
