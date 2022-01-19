@@ -28,13 +28,8 @@ function DiscountCard(props) {
         <Card.Text>
           Click in delete button below to ged rid of this discount!
         </Card.Text>
-        
-        <Button
-          className="ps-4 pe-4"
-          variant="danger"
-          type="submit"
-          onClick={deleteCategoryHandler}
-        >Delete discount</Button>{" "}
+        <Button variant="primary">Details</Button>{" "}
+        <Button variant="danger" type="submit" onClick={deleteCategoryHandler}>Delete</Button>{" "}
       </Card.Body>
     </Card>
   );
