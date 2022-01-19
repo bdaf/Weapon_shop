@@ -93,7 +93,7 @@ function Discounts() {
               <button className={`${styles.marginn} btn btn-dark`} onClick={() => updateSortType("order/from/desc")}>From date desc</button>{' '}
               <button className={`${styles.marginn} btn btn-dark`} onClick={() => updateSortType("order/to/asc")}>To date</button>{' '}
               <button className={`${styles.marginn} btn btn-dark`} onClick={() => updateSortType("order/to/desc")}>To date desc</button>
-              <input className={`${styles.marginn} ${styles.input}`} type="text" placeholder="Search Product" required id="filter" onChange={(e) => filterProducts(e)} />
+              <input className={`${styles.marginn} ${styles.input}`} type="text" placeholder="Search Discount" required id="filter" onChange={(e) => filterProducts(e)} />
               <NewDiscountForm onAddDiscount={addDiscountHandler} />
               <div className={styles.imargin}>{feedback != null ? feedback : null}</div>
       <DiscountsList
