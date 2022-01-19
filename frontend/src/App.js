@@ -25,7 +25,7 @@ function App() {
           {/* <Route path='/orders' element={<Orders />} />*/}
           <Route path="/main" element={<Main />} />
           <Route path="/productsBuy" element={<ProductsBuy />} />
-          <Route path="/orderForm" element={<OrderForm />} />
+          <Route path="/productsBuy/:id" element={<OrderForm />} />
         </Routes>
       </div>
   );

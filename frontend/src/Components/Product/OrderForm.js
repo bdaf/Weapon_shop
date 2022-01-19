@@ -1,8 +1,14 @@
 import styles from "./ProductsList.module.css";
+import React, { useEffect, useState } from "react";
 import { useRef } from "react";
-
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 function OrderForm(props) {
+    const params = useParams();
+
+    const [product, setProduct] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const nameInputRef = useRef();
     const surnameInputRef = useRef();
@@ -13,6 +19,20 @@ function OrderForm(props) {
     const cityInputRef = useRef();
     const postcodeInputRef = useRef();
     const countryInputRef = useRef();
+
+    const fetchCategory = async () => {
+        await axios
+            .get(`http://localhost:80/api/product/${params.id}`)
+            .then((response) => {
+                setProduct(response.data);
+                setLoading(true);
+            });
+    };
+
+    useEffect(() => {
+        fetchCategory();
+    }, []);
+
 
     function submitHandler(event) {
         event.preventDefault();
@@ -69,7 +89,6 @@ function OrderForm(props) {
                     <button className="btn btn-dark">Buy</button>
                 </div>
             </form>
-
         </div>
     );
 }
