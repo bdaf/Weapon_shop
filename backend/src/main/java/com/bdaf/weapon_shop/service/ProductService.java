@@ -19,7 +19,15 @@ public interface ProductService {
 
     Product fetchProductForSaleById(Long aProductId);
 
-    List<Product> findAllProductsOrderedByName();
+    List<Product> findAllProductsOrderedByPriceAsc();
 
-    List<Product> findAllProductsOrderedByPrice();
+    List<Product> findAllProductsOrderedByPriceDesc();
+
+    List<Product> findAllProductsOrderedByNameAsc();
+
+    List<Product> findAllProductsOrderedByNameDesc();
+
+    List<Product> findAllProductsOrderedByReleaseDateAsc();
+
+    List<Product> findAllProductsOrderedByReleaseDateDesc();
 }

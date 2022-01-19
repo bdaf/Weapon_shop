@@ -32,14 +32,38 @@ public class ProductServiceImpl implements ProductService {
         return getDiscountedProducts(products);
     }
     @Override
-    public List<Product> findAllProductsOrderedByName() {
-        List<Product> products = productRepository.findProductsByForSaleOrderByName(true);
+    public List<Product> findAllProductsOrderedByNameAsc() {
+        List<Product> products = productRepository.findProductsByForSaleOrderByNameAsc(true);
         return getDiscountedProducts(products);
     }
 
     @Override
-    public List<Product> findAllProductsOrderedByPrice() {
-        List<Product> products = productRepository.findProductsByForSaleOrderByPrice(true);
+    public List<Product> findAllProductsOrderedByNameDesc() {
+        List<Product> products = productRepository.findProductsByForSaleOrderByNameDesc(true);
+        return getDiscountedProducts(products);
+    }
+
+    @Override
+    public List<Product> findAllProductsOrderedByPriceAsc() {
+        List<Product> products = productRepository.findProductsByForSaleOrderByPriceAsc(true);
+        return getDiscountedProducts(products);
+    }
+
+    @Override
+    public List<Product> findAllProductsOrderedByPriceDesc() {
+        List<Product> products = productRepository.findProductsByForSaleOrderByPriceDesc(true);
+        return getDiscountedProducts(products);
+    }
+
+    @Override
+    public List<Product> findAllProductsOrderedByReleaseDateAsc() {
+        List<Product> products = productRepository.findProductsByForSaleOrderByReleaseDateAsc(true);
+        return getDiscountedProducts(products);
+    }
+
+    @Override
+    public List<Product> findAllProductsOrderedByReleaseDateDesc() {
+        List<Product> products = productRepository.findProductsByForSaleOrderByReleaseDateDesc(true);
         return getDiscountedProducts(products);
     }
 

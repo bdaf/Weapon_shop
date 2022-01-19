@@ -14,7 +14,15 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Product findProductByProductIdAndForSale(Long aProductId, Boolean aForSale);
 
-    List<Product> findProductsByForSaleOrderByPrice(Boolean aForSale);
+    List<Product> findProductsByForSaleOrderByPriceAsc(Boolean aForSale);
 
-    List<Product> findProductsByForSaleOrderByName(Boolean aForSale);
+    List<Product> findProductsByForSaleOrderByPriceDesc(Boolean aForSale);
+
+    List<Product> findProductsByForSaleOrderByNameAsc(Boolean aForSale);
+
+    List<Product> findProductsByForSaleOrderByNameDesc(Boolean aForSale);
+
+    List<Product> findProductsByForSaleOrderByReleaseDateAsc(Boolean aForSale);
+
+    List<Product> findProductsByForSaleOrderByReleaseDateDesc(Boolean aForSale);
 }

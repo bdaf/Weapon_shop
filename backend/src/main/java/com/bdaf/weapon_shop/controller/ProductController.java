@@ -20,14 +20,34 @@ public class ProductController {
         return productService.findAllProducts();
     }
 
-    @GetMapping("/order/name")
-    public List<Product> getAllProductsOrderedByName() {
-        return productService.findAllProductsOrderedByName();
+    @GetMapping("/order/name/asc")
+    public List<Product> getAllProductsOrderedByNameAsc() {
+        return productService.findAllProductsOrderedByNameAsc();
     }
 
-    @GetMapping("/order/price")
-    public List<Product> getAllProductsOrderedByPrize() {
-        return productService.findAllProductsOrderedByPrice();
+    @GetMapping("/order/name/desc")
+    public List<Product> getAllProductsOrderedByNameDesc() {
+        return productService.findAllProductsOrderedByNameDesc();
+    }
+
+    @GetMapping("/order/date/asc")
+    public List<Product> getAllProductsOrderedByReleaseDateAsc() {
+        return productService.findAllProductsOrderedByReleaseDateAsc();
+    }
+
+    @GetMapping("/order/date/desc")
+    public List<Product> getAllProductsOrderedByReleaseDateDesc() {
+        return productService.findAllProductsOrderedByReleaseDateDesc();
+    }
+
+    @GetMapping("/order/price/asc")
+    public List<Product> getAllProductsOrderedByPrizeAsc() {
+        return productService.findAllProductsOrderedByPriceAsc();
+    }
+
+    @GetMapping("/order/price/desc")
+    public List<Product> getAllProductsOrderedByPrizeDesc() {
+        return productService.findAllProductsOrderedByPriceDesc();
     }
 
     @GetMapping("/{id}")
