@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { Alert } from "react-bootstrap";
 import axios from "axios";
-import NewProductForm from "../Components/Product/NewProductForm";
-import ProductsList from "../Components/Product/ProductsList";
+import ProductsList from "../Components/Product/ProductsBuyList";
 import styles from "../Components/Product/ProductsList.module.css";
 
 const api = axios.create({

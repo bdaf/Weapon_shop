@@ -11,7 +11,10 @@ function CustomNavbar() {
           <Link to="main" className="link-light">
             <MDBIcon icon="hammer" style={{ marginRight: "10px" }} /> Weaponshop
           </Link>
-        </Navbar.Brand>
+              </Navbar.Brand>
+        <Link to="productsBuy" className="link-light">
+            Products Buy
+        </Link>
         <Link to="products" className="link-light">
           Products (OFA)
         </Link>
