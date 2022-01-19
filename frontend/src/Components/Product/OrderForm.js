@@ -20,17 +20,22 @@ function OrderForm(props) {
     const postcodeInputRef = useRef();
     const countryInputRef = useRef();
 
-    const fetchCategory = async () => {
+    const fetchProduct = async () => {
+        console.log("siema");
+
         await axios
-            .get(`http://localhost:80/api/product/${params.id}`)
+            .get(`http://localhost:80/api/products/${params.id}`)
             .then((response) => {
+                console.log("siema");
                 setProduct(response.data);
-                setLoading(true);
+                setLoading(true);;
+            }).catch((e) => { 
+                console.log(e);
             });
     };
 
     useEffect(() => {
-        fetchCategory();
+        fetchProduct();
     }, []);
 
 
@@ -61,12 +66,17 @@ function OrderForm(props) {
         props.onAddForm(orderData);
     }
 
+    if (!loading) return null;
 
     return (
         <div className={styles.formp}>
             <form className="form-group border rounded shadow p-3 mb-5 bg-body rounded mb-3" onSubmit={submitHandler} responsive>
                 <div className={styles.pad}>
-                    <h5>Product Order Form:</h5>
+                    <h4>Product Order Form:</h4>
+                    <img width={150} height={150} src={product.photoUrl} alt="Logo" />
+                    <h6>Product name: { product.name }</h6>
+                    <h6>Product price: {product.price} zl</h6>
+                    <br></br>
                     <label className={styles.labels} htmlFor="name">Name:</label>
                     <input className="form-control" type="text" required id="name" ref={nameInputRef}  />
                     <label className={styles.labels} htmlFor="surname">Surname:</label>
@@ -77,7 +87,7 @@ function OrderForm(props) {
                     <input className="form-control" type="number" required id="phoneNumber" ref={phoneNumberInputRef} />
                     <label className={styles.labels} htmlFor="street">Street:</label>
                     <input className="form-control" type="text" required id="street" ref={streetInputRef} />
-                    <label className={styles.labels} htmlFor="houseNumber">House number</label>
+                    <label className={styles.labels} htmlFor="houseNumber">House number:</label>
                     <input className="form-control" type="number" required id="houseNumber" ref={houseNumberInputRef} />
                     <label className={styles.labels} htmlFor="city">City:</label>
                     <input className="form-control" type="text" required id="city" ref={cityInputRef} />
@@ -86,9 +96,10 @@ function OrderForm(props) {
                     <label className={styles.labels} htmlFor="country">Country:</label>
                     <input className="form-control" type="text" required id="country" ref={countryInputRef} />
                     <br></br>
-                    <button className="btn btn-dark">Buy</button>
+                    <button className="btn btn-dark">Buy {product.name}</button>
                 </div>
             </form>
+
         </div>
     );
 }
