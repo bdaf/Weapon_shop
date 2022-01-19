@@ -18,6 +18,24 @@ public class DiscountController {
     @GetMapping
     public List<Discount> getAllDiscounts() {return discountService.findAllDiscounts();}
 
+    @GetMapping("/order/percent/asc")
+    public List<Discount> getAllDiscountsOrderedByPercentAsc() {return discountService.findAllDiscountsOrderedByPercentAsc();}
+
+    @GetMapping("/order/percent/desc")
+    public List<Discount> getAllDiscountsOrderedByPercentDesc() {return discountService.findAllDiscountsOrderedByPercentDesc();}
+
+    @GetMapping("/order/from/asc")
+    public List<Discount> getAllDiscountsOrderedByFromAsc() {return discountService.findAllDiscountsOrderedByFromAsc();}
+
+    @GetMapping("/order/from/desc")
+    public List<Discount> getAllDiscountsOrderedByFromDesc() {return discountService.findAllDiscountsOrderedByFromDesc();}
+
+    @GetMapping("/order/to/asc")
+    public List<Discount> getAllDiscountsOrderedByToAsc() {return discountService.findAllDiscountsOrderedByToAsc();}
+
+    @GetMapping("/order/to/desc")
+    public List<Discount> getAllDiscountsOrderedByToDesc() {return discountService.findAllDiscountsOrderedByToDesc();}
+
     @PostMapping
     public Discount saveDiscount(@RequestBody Discount aDiscount) {
         return discountService.saveDiscountToDatabaseIfNotExists(aDiscount);

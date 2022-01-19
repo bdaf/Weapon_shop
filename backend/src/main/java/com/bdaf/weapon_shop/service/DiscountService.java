@@ -10,4 +10,16 @@ public interface DiscountService {
     Discount saveDiscountToDatabaseIfNotExists(Discount aDiscount);
 
     void deleteDiscountById(Long aDiscountId);
+
+    List<Discount> findAllDiscountsOrderedByPercentAsc();
+
+    List<Discount> findAllDiscountsOrderedByPercentDesc();
+
+    List<Discount> findAllDiscountsOrderedByFromAsc();
+
+    List<Discount> findAllDiscountsOrderedByFromDesc();
+
+    List<Discount> findAllDiscountsOrderedByToAsc();
+
+    List<Discount> findAllDiscountsOrderedByToDesc();
 }
