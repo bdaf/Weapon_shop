@@ -1,8 +1,9 @@
 import { Alert } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import NewDiscountForm from "../Components/Discount/NewDiscountForm";
+import NewDiscountForm from "../Components/Discount/NewDiscountForm.js";
 import DiscountsList from "../Components/Discount/DiscountsList";
+import styles from "../Components/Discount/DiscountsList.module.css";
 
 const api = axios.create({
   baseURL: "http://localhost:80/api/discounts",
@@ -63,12 +64,12 @@ function Discounts() {
   }
 
   return (
-    <div>
-      <h1>Discounts</h1>
-      <h1>Add new discount:</h1>
-
+      <div>
+          <br></br>
+          <h2>Discounts</h2>
+          <br></br>
       <NewDiscountForm onAddDiscount={addDiscountHandler} />
-      {feedback != null ? feedback : null}
+          <div className={styles.imargin}>{feedback != null ? feedback : null}</div>
       <DiscountsList
         discounts={loadedDiscounts}
         updateDiscounts={fetchAllDiscounts}
