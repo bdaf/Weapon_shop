@@ -13,6 +13,7 @@ import Categories from './Pages/Categories';
 import OrderForm from './Components/Product/OrderForm';
 import Pay from './Components/Product/Pay';
 import CategoryDetails from './Components/Category/CategoryDetails';
+import DiscountDetails from './Components/Discount/DiscountDetails';
 
 function App() {
   return (
@@ -28,6 +29,8 @@ function App() {
           <Route path="/productsBuy" element={<ProductsBuy />} />
               <Route path="/productsBuy/:id" element={<OrderForm />} />
               <Route path="/pay" element={<Pay />} />
+              <Route path="/discountDetails" element={<DiscountDetails />} />
+
         </Routes>
       </div>
   );
