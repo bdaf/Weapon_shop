@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Alert } from "react-bootstrap";
 import axios from "axios";
 import ProductsList from "../Components/Product/ProductsBuyList";
 import styles from "../Components/Product/ProductsList.module.css";
@@ -11,11 +10,13 @@ const api = axios.create({
 function ProductsBuy() {
   const [isLoading, setIsLoading] = useState(true);
   const [loadedProducts, setLoadedProducts] = useState([]);
+  const [loadedFilteredProducts, setFilteredProducts] = useState([]);
 
   const fetchAllProducts = async (url) => {
     await api.get("/"+url).then(function (response) {
       setIsLoading(false);
       setLoadedProducts(response.data);
+      setFilteredProducts(response.data);
     }).catch((e) => {
       console.log(e);
     });
@@ -28,6 +29,15 @@ function ProductsBuy() {
   useEffect(() => {
     fetchAllProducts('');
   }, []);
+
+  function filterProducts(e){
+    console.log("SIEMA " +e.target.value)
+
+    setFilteredProducts(loadedProducts.filter((product) => {
+      console.log(product + e.target.value)
+      return product.name.toLowerCase().includes(e.target.value.toLowerCase());
+    }))
+  }
 
   if (isLoading) {
     return (
@@ -49,11 +59,11 @@ function ProductsBuy() {
               <button className="btn btn-dark" onClick={() => updateSortType("order/price/desc")}>Price desc</button>
               <button className="btn btn-dark" onClick={() => updateSortType("order/date/asc")}>Release date</button>
               <button className="btn btn-dark" onClick={() => updateSortType("order/date/desc")}>Release date desc</button>
-              <input className={styles.input} type="text" required id="filter" />
+              <input className={styles.input} type="text" required id="filter" onChange={(e) => filterProducts(e)}/>
               <button className="btn btn-dark">Filter</button>
               </div>
       <ProductsList
-        products={loadedProducts}
+        products={loadedFilteredProducts}
         updateProducts={fetchAllProducts}
       />
     </div>
