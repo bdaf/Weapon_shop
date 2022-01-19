@@ -20,6 +20,16 @@ public class ProductController {
         return productService.findAllProducts();
     }
 
+    @GetMapping("/order/name")
+    public List<Product> getAllProductsOrderedByName() {
+        return productService.findAllProductsOrderedByName();
+    }
+
+    @GetMapping("/order/price")
+    public List<Product> getAllProductsOrderedByPrize() {
+        return productService.findAllProductsOrderedByPrice();
+    }
+
     @GetMapping("/{id}")
     public Product getProductById(@PathVariable("id") Long aProductId) {
         return productService.findProductById(aProductId);

@@ -1,6 +1,5 @@
 package com.bdaf.weapon_shop.service;
 
-import com.bdaf.weapon_shop.entity.Category;
 import com.bdaf.weapon_shop.entity.Discount;
 import com.bdaf.weapon_shop.entity.Product;
 import com.bdaf.weapon_shop.repository.ProductRepository;
@@ -30,10 +29,25 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> findAllProducts() {
         List<Product> products = productRepository.findProductsByForSale(true);
-        for (int i = 0; i < products.size(); i++) {
-            products.set(i, getDiscountedProduct(products.get(i)));
+        return getDiscountedProducts(products);
+    }
+    @Override
+    public List<Product> findAllProductsOrderedByName() {
+        List<Product> products = productRepository.findProductsByForSaleOrderByName(true);
+        return getDiscountedProducts(products);
+    }
+
+    @Override
+    public List<Product> findAllProductsOrderedByPrice() {
+        List<Product> products = productRepository.findProductsByForSaleOrderByPrice(true);
+        return getDiscountedProducts(products);
+    }
+
+    private List<Product> getDiscountedProducts(List<Product> aProductsToDiscount) {
+        for (int i = 0; i < aProductsToDiscount.size(); i++) {
+            aProductsToDiscount.set(i, getDiscountedProduct(aProductsToDiscount.get(i)));
         }
-        return products;
+        return aProductsToDiscount;
     }
 
     @Override
@@ -44,6 +58,7 @@ public class ProductServiceImpl implements ProductService {
         }
         return getDiscountedProduct(product);
     }
+
 
     @Override
     public Product addProduct(Product aProduct) {

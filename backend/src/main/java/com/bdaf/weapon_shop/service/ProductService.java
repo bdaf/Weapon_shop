@@ -18,4 +18,8 @@ public interface ProductService {
     Product findById(Long aProductId);
 
     Product fetchProductForSaleById(Long aProductId);
+
+    List<Product> findAllProductsOrderedByName();
+
+    List<Product> findAllProductsOrderedByPrice();
 }
