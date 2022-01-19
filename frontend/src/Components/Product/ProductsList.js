@@ -22,7 +22,7 @@ function ProductsList(props) {
         {props.products.map((product) => {
           return (
             <tbody key={product.productId}>
-                  <ProductCard product={product} updateProducts={props.updateProducts} showFeedback={props.showFeedback} />
+                  <ProductCard product={product} updateProducts={props.updateProducts} />
             </tbody>
           );
         })}

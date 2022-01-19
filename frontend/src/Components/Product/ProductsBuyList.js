@@ -14,7 +14,7 @@ function ProductsBuyList(props) {
                         <th>Amount</th>
                         <th>Category Name</th>
                         <th>Company Name</th>
-                        <th>Buy</th>
+                        <th>Photo</th>
                     </tr>
                 </thead>
                 {props.products.map((product) => {
