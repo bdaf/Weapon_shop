@@ -2,7 +2,8 @@ import styles from "./ProductsList.module.css";
 import React, { useEffect, useState } from "react";
 import { useRef } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 function OrderForm(props) {
     const params = useParams();
@@ -19,6 +20,8 @@ function OrderForm(props) {
     const cityInputRef = useRef();
     const postcodeInputRef = useRef();
     const countryInputRef = useRef();
+
+    const navigate = useNavigate();
 
     const fetchProduct = async () => {
         console.log("siema");
@@ -38,9 +41,12 @@ function OrderForm(props) {
         fetchProduct();
     }, []);
 
+    function navigateToMenu() {
+        navigate('/main');
+    }
 
-    function submitHandler(event) {
-        event.preventDefault();
+    const submitHandler = async (e) => {
+        e.preventDefault();
 
         const enteredName = nameInputRef.current.value;
         const enteredSurname = surnameInputRef.current.value;
@@ -53,18 +59,50 @@ function OrderForm(props) {
         const enteredCountry = countryInputRef.current.value;
 
         const orderData = {
-            name: enteredName,
-            surname: enteredSurname,
-            email: enteredEmail,
-            phoneNumber: enteredPhoneNumber,
-            street: enteredStreet,
-            houseNumber: enteredHouseNumber,
-            city: enteredCity,
-            postcode: enteredPostcode,
-            country: enteredCountry,
+            customer: {
+                name: enteredName,
+                surname: enteredSurname,
+                email: enteredEmail,
+                phoneNumber: enteredPhoneNumber,
+                street: enteredStreet,
+                houseNumber: enteredHouseNumber,
+                city: enteredCity,
+                postcode: enteredPostcode,
+                country: enteredCountry
+            },
+            product: product
         };
-        props.onAddForm(orderData);
-    }
+        
+    
+        await axios
+            .post(`http://localhost:80/api/orders`, {
+                customer: {
+                    name: enteredName,
+                    surname: enteredSurname,
+                    email: enteredEmail,
+                    phoneNumber: enteredPhoneNumber,
+                    street: enteredStreet,
+                    houseNumber: enteredHouseNumber,
+                    city: enteredCity,
+                    postcode: enteredPostcode,
+                    country: enteredCountry
+                },
+                product: product
+            }).then((response) => {
+                if (response.status === 200) {
+                    console.log("Discount has been added to category!");
+
+                    navigateToMenu();
+                }
+                   // showFeedbackAfterAdding("success", "Discount has been added to category!");
+                else console.log("We couldn't add this discount to category!");
+                props.fetchDiscountsOfSelectedCategory();
+            }).catch((e) => {
+                console.log(e);
+                //showFeedbackAfterAdding("danger", "Error occured, propably this discount already is in this category. Try with another one.");
+            });
+    };
+
 
     if (!loading) return null;
 
@@ -96,7 +134,7 @@ function OrderForm(props) {
                     <label className={styles.labels} htmlFor="country">Country:</label>
                     <input className="form-control" type="text" required id="country" ref={countryInputRef} />
                     <br></br>
-                    <button className="btn btn-dark">Buy {product.name}</button>
+                    <button className="btn btn-dark" type="submit">Buy {product.name}</button>
                 </div>
             </form>
 
