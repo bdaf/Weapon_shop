@@ -27,7 +27,7 @@ function Main() {
             </Carousel.Item>
         </Carousel>
         <br></br>
-        <Link to="productsBuy" className="link-light"> <button className="btn btn-dark p-4 py-4 fs-5">Buy Products</button></Link>
+        <Link to="/productsBuy" className="link-light"> <button className="btn btn-dark p-4 py-4 fs-5">Buy Products</button></Link>
     </div>
 
 }

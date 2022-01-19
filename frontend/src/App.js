@@ -23,7 +23,7 @@ function App() {
           <Route path='/products' element={<Products />} />
           <Route path='/orders' element={<Orders />} />
           <Route path="/main" element={<Main />} />
-          <Route path="/productsbuy" element={<ProductsBuy />} />
+          <Route path="/productsBuy" element={<ProductsBuy />} />
         </Routes>
       </div>
   );
