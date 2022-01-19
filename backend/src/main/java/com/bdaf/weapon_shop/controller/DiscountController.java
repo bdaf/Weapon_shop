@@ -41,6 +41,11 @@ public class DiscountController {
         return discountService.saveDiscountToDatabaseIfNotExists(aDiscount);
     }
 
+    @PutMapping("/{id}")
+    public Discount updateDiscount(@PathVariable("id") Long aDiscountId, @RequestBody Discount aDiscount) {
+        return discountService.updateDiscountById(aDiscountId, aDiscount);
+    }
+
     @DeleteMapping("/{id}")
     public String deleteDiscountById(@PathVariable("id") Long aDiscountId){
         discountService.deleteDiscountById(aDiscountId);

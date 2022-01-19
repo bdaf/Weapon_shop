@@ -66,4 +66,15 @@ public class DiscountServiceImpl implements DiscountService {
     public List<Discount> findAllDiscountsOrderedByToDesc() {
         return discountRepository.findByOrderByToDateDesc();
     }
+
+    @Override
+    public Discount updateDiscountById(Long aDiscountId, Discount aDiscount) {
+        Discount discountToChange = discountRepository.findById(aDiscountId).get();
+
+        if(aDiscount.getPercent() != null) discountToChange.setPercent(aDiscount.getPercent());
+        if(aDiscount.getFromDate() != null) discountToChange.setFromDate(aDiscount.getFromDate());
+        if(aDiscount.getToDate() != null) discountToChange.setToDate(aDiscount.getToDate());
+
+        return discountRepository.save(discountToChange);
+    }
 }
