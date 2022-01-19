@@ -45,6 +45,7 @@ function Discounts() {
   }
 
   function fetchAllDiscounts(url) {
+    if(url === undefined) url='';
     console.log(url);
     api.get("/"+url).then(function (response) {
       setIsLoading(false);
@@ -54,7 +55,7 @@ function Discounts() {
   }
 
   useEffect(() => {
-    fetchAllDiscounts('');
+    fetchAllDiscounts();
   }, []);
 
 
