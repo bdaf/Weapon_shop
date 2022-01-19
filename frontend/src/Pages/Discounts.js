@@ -13,6 +13,7 @@ function Discounts() {
   const [feedback, setFeedback] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [loadedDiscounts, setLoadedDiscounts] = useState([]);
+  const [loadedFilteredDiscounts, setLoadedFilteredDiscounts] = useState([]);
 
   const showFeedback = (typeOfAlert, text) => {
     setFeedback(<Alert variant={typeOfAlert}>{text}</Alert>);
@@ -48,11 +49,12 @@ function Discounts() {
     api.get("/"+url).then(function (response) {
       setIsLoading(false);
       setLoadedDiscounts(response.data);
+      setLoadedFilteredDiscounts(response.data);
     });
   }
 
   useEffect(() => {
-    fetchAllDiscounts();
+    fetchAllDiscounts('');
   }, []);
 
 
@@ -61,7 +63,12 @@ function Discounts() {
   }
 
   function filterProducts(e){
-
+    setLoadedFilteredDiscounts(loadedDiscounts.filter((discount) => {
+      console.log(discount + e.target.value)
+      return (discount.percent*100 + '').includes(e.target.value) ||
+      discount.fromDate.toLowerCase().includes(e.target.value.toLowerCase()) ||
+      discount.toDate.toLowerCase().includes(e.target.value.toLowerCase())
+  }))
   }
 
   if (isLoading) {
@@ -90,7 +97,7 @@ function Discounts() {
               <NewDiscountForm onAddDiscount={addDiscountHandler} />
               <div className={styles.imargin}>{feedback != null ? feedback : null}</div>
       <DiscountsList
-        discounts={loadedDiscounts}
+        discounts={loadedFilteredDiscounts}
         updateDiscounts={fetchAllDiscounts}
         showFeedback={showFeedback}
       />
