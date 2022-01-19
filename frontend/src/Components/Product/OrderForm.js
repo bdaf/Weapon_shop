@@ -42,7 +42,7 @@ function OrderForm(props) {
     }, []);
 
     function navigateToMenu() {
-        navigate('/main');
+        navigate('/pay');
     }
 
     const submitHandler = async (e) => {

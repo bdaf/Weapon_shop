@@ -11,6 +11,7 @@ import Discounts from './Pages/Discounts';
 import CustomNavbar from './Components/layout/CustomNavbar';
 import Categories from './Pages/Categories';
 import OrderForm from './Components/Product/OrderForm';
+import Pay from './Components/Product/Pay';
 import CategoryDetails from './Components/Category/CategoryDetails';
 
 function App() {
@@ -25,7 +26,8 @@ function App() {
           {/* <Route path='/orders' element={<Orders />} />*/}
           <Route path="/main" element={<Main />} />
           <Route path="/productsBuy" element={<ProductsBuy />} />
-          <Route path="/productsBuy/:id" element={<OrderForm />} />
+              <Route path="/productsBuy/:id" element={<OrderForm />} />
+              <Route path="/pay" element={<Pay />} />
         </Routes>
       </div>
   );
