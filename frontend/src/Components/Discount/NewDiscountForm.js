@@ -10,7 +10,7 @@ function NewDiscountForm(props) {
     function submitHandler(event) {
         event.preventDefault();
 
-        const enteredpercent = percentInputRef.current.value;
+        const enteredpercent = percentInputRef.current.value/100;
         const enteredfrom = fromInputRef.current.value;
         const enteredto = toInputRef.current.value;
 

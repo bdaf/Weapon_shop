@@ -22,7 +22,7 @@ function DiscountCard(props) {
   return (
     <Card style={{ width: "18rem" }}>
       <Card.Body>
-        <Card.Title>Percent: {props.discount.percent}</Card.Title>
+        <Card.Title>Percent: {props.discount.percent*100} %</Card.Title>
         <Card.Title>From: {props.discount.fromDate}</Card.Title>
         <Card.Title>To: {props.discount.toDate}</Card.Title>
         <Card.Text>

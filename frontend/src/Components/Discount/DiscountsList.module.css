@@ -25,4 +25,44 @@
     margin-left: 25%;
     margin-right: 25%;
 }
+/* This below I pasted from productListmodulecss */
+.formp{
+    text-align:center;
+    margin-left:25%;
+    margin-right:25%;
+    padding:2%;
+}
 
+.pad {
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top:2%;
+}
+
+.labels {
+    padding-top:1%;
+}
+
+.width {
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.alerts {
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.input{
+    margin-left:2%;
+    height:35px;
+    text-align:center;
+}
+
+.filter{
+    margin:2%;
+}
+
+.marginn{
+    margin:10px;
+}

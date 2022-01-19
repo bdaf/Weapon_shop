@@ -11,6 +11,8 @@ const api = axios.create({
 
 function Discounts() {
   const [feedback, setFeedback] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadedDiscounts, setLoadedDiscounts] = useState([]);
 
   const showFeedback = (typeOfAlert, text) => {
     setFeedback(<Alert variant={typeOfAlert}>{text}</Alert>);
@@ -41,11 +43,9 @@ function Discounts() {
       });
   }
 
-  const [isLoading, setIsLoading] = useState(true);
-  const [loadedDiscounts, setLoadedDiscounts] = useState([]);
-
-  function fetchAllDiscounts() {
-    api.get("/").then(function (response) {
+  function fetchAllDiscounts(url) {
+    console.log(url);
+    api.get("/"+url).then(function (response) {
       setIsLoading(false);
       setLoadedDiscounts(response.data);
     });
@@ -54,6 +54,15 @@ function Discounts() {
   useEffect(() => {
     fetchAllDiscounts();
   }, []);
+
+
+  function updateSortType(url){
+    fetchAllDiscounts(url)
+  }
+
+  function filterProducts(e){
+
+  }
 
   if (isLoading) {
     return (
@@ -68,8 +77,18 @@ function Discounts() {
           <br></br>
           <h2>Discounts</h2>
           <br></br>
-      <NewDiscountForm onAddDiscount={addDiscountHandler} />
-          <div className={styles.imargin}>{feedback != null ? feedback : null}</div>
+      
+          
+          <big className={styles.marginn} >Sort by:</big>{' '}
+              <button  className = {`${styles.marginn} btn btn-dark`} onClick={() => updateSortType("order/percent/asc")}>Percent</button>{' '}
+              <button className={`${styles.marginn} btn btn-dark`} onClick={() => updateSortType("order/percent/desc")}>Percent desc</button>{' '}
+              <button className={`${styles.marginn} btn btn-dark`} onClick={() => updateSortType("order/from/asc")}>From</button>{' '}
+              <button className={`${styles.marginn} btn btn-dark`} onClick={() => updateSortType("order/from/desc")}>From date desc</button>{' '}
+              <button className={`${styles.marginn} btn btn-dark`} onClick={() => updateSortType("order/to/asc")}>To date</button>{' '}
+              <button className={`${styles.marginn} btn btn-dark`} onClick={() => updateSortType("order/to/desc")}>To date desc</button>
+              <input className={`${styles.marginn} ${styles.input}`} type="text" placeholder="Search Product" required id="filter" onChange={(e) => filterProducts(e)} />
+              <NewDiscountForm onAddDiscount={addDiscountHandler} />
+              <div className={styles.imargin}>{feedback != null ? feedback : null}</div>
       <DiscountsList
         discounts={loadedDiscounts}
         updateDiscounts={fetchAllDiscounts}
