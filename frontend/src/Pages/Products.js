@@ -5,13 +5,14 @@ import NewProductForm from "../Components/Product/NewProductForm";
 import ProductsList from "../Components/Product/ProductsList";
 import styles from "../Components/Product/ProductsList.module.css";
 
-
 const api = axios.create({
   baseURL: "http://localhost:80/api/products",
 });
 
 function Products(props) {
   const [feedback, setFeedback] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadedProducts, setLoadedProducts] = useState([]);
 
   async function addProductHandler(productData) {
     // http POST method
@@ -27,7 +28,7 @@ function Products(props) {
       })
       .then(function (response) {
         if (response.status === 200) {
-          setFeedback(<Alert variant="success">Product has been added!</Alert>);
+          showFeedback("success", "Product has been added!");
           // get result data from http method
           const resultData = response.data;
           // check if there isn't one with same name
@@ -48,23 +49,24 @@ function Products(props) {
       })
       .catch((e) => {
         console.log(e);
-        setFeedback(
-          <Alert variant="danger">
-            Error occurred during adding product, check out fills and try again.
-          </Alert>
-        );
+        showFeedback("danger","Error occurred during adding product, check out fills and try again.");
       });
   }
 
-  const [isLoading, setIsLoading] = useState(true);
-  const [loadedProducts, setLoadedProducts] = useState([]);
-
-  useEffect(() => {
-    api.get("/").then(function (response) {
+  const fetchAllProducts = async () => {
+    await api.get("/").then(function (response) {
       setIsLoading(false);
       setLoadedProducts(response.data);
     });
+  };
+
+  useEffect(() => {
+    fetchAllProducts();
   }, []);
+
+  const showFeedback = function (typeOfFeedback, text) {
+    setFeedback(<Alert variant={typeOfFeedback}>{text}</Alert>);
+  };
 
   if (isLoading) {
     return (
@@ -75,12 +77,19 @@ function Products(props) {
   }
 
   return (
-      <div>
-          <br></br>
+    <div>
+      <br></br>
       <h2>Products</h2>
       <NewProductForm onAddProduct={addProductHandler} />
-          <div className={styles.alerts}> {feedback != null ? feedback : null} </div>
-      <ProductsList products={loadedProducts} />
+      <div className={styles.alerts}>
+        {" "}
+        {feedback != null ? feedback : null}{" "}
+      </div>
+      <ProductsList
+        products={loadedProducts}
+        updateProducts={fetchAllProducts}
+        showFeedback={showFeedback}
+      />
     </div>
   );
 }

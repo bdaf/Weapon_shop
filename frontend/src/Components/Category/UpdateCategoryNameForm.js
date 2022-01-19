@@ -44,7 +44,7 @@ function UpdateCategoryNameForm(props) {
         console.log(e);
         showFeedbackAfterUpdating(
           "danger",
-          "Error occured, Try with another one or later."
+          "Error occured, propably category with that name already exists. Try with another one or later."
         );
       });
   }
