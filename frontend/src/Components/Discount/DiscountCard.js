@@ -22,9 +22,9 @@ function DiscountCard(props) {
   return (
     <Card style={{ width: "18rem" }}>
       <Card.Body>
-        <Card.Title>{props.discount.percent}</Card.Title>
-        <Card.Title>{props.discount.fromDate}</Card.Title>
-        <Card.Title>{props.discount.toDate}</Card.Title>
+        <Card.Title>Percent: {props.discount.percent}</Card.Title>
+        <Card.Title>From: {props.discount.fromDate}</Card.Title>
+        <Card.Title>To: {props.discount.toDate}</Card.Title>
         <Card.Text>
           Click in delete button below to ged rid of this discount!
         </Card.Text>

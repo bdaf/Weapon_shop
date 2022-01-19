@@ -8,59 +8,59 @@ const api = axios.create({
 });
 
 function ProductsBuy() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [loadedProducts, setLoadedProducts] = useState([]);
-  const [loadedFilteredProducts, setFilteredProducts] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [loadedProducts, setLoadedProducts] = useState([]);
+    const [loadedFilteredProducts, setFilteredProducts] = useState([]);
 
-  const fetchAllProducts = async (url) => {
-    await api.get("/"+url).then(function (response) {
-      setIsLoading(false);
-      setLoadedProducts(response.data);
-      setFilteredProducts(response.data);
-    }).catch((e) => {
-      console.log(e);
-    });
-  };
+    const fetchAllProducts = async (url) => {
+        await api.get("/" + url).then(function (response) {
+            setIsLoading(false);
+            setLoadedProducts(response.data);
+            setFilteredProducts(response.data);
+        }).catch((e) => {
+            console.log(e);
+        });
+    };
 
- function updateSortType(url){
-    fetchAllProducts(url);
- }
-  
-  useEffect(() => {
-    fetchAllProducts('');
-  }, []);
+    function updateSortType(url) {
+        fetchAllProducts(url);
+    }
 
-  function filterProducts(e){
-    console.log("SIEMA " +e.target.value)
+    useEffect(() => {
+        fetchAllProducts('');
+    }, []);
 
-    setFilteredProducts(loadedProducts.filter((product) => {
-      console.log(product + e.target.value)
-      return product.name.toLowerCase().includes(e.target.value.toLowerCase());
-    }))
-  }
+    function filterProducts(e) {
+        console.log("SIEMA " + e.target.value)
 
-  if (isLoading) {
-    return (
-      <section>
-        <p>Loading...</p>
-      </section>
-    );
-  }
+        setFilteredProducts(loadedProducts.filter((product) => {
+            console.log(product + e.target.value)
+            return product.name.toLowerCase().includes(e.target.value.toLowerCase());
+        }))
+    }
+
+    if (isLoading) {
+        return (
+            <section>
+                <p>Loading...</p>
+            </section>
+        );
+    }
+
 
   return (
     <div>
       <br></br>
           <h2>Products for you to Buy!</h2>
           <div className={styles.filter}>
-              <b>Sort by:</b>{' '}
-              <button className="btn btn-dark" onClick={() => updateSortType("order/name/asc")}>Name</button>
-              <button className="btn btn-dark" onClick={() => updateSortType("order/name/desc")}>Name desc</button>
-              <button className="btn btn-dark" onClick={() => updateSortType("order/price/asc")}>Price</button>
-              <button className="btn btn-dark" onClick={() => updateSortType("order/price/desc")}>Price desc</button>
-              <button className="btn btn-dark" onClick={() => updateSortType("order/date/asc")}>Release date</button>
-              <button className="btn btn-dark" onClick={() => updateSortType("order/date/desc")}>Release date desc</button>
-              <input className={styles.input} type="text" required id="filter" onChange={(e) => filterProducts(e)}/>
-              <button className="btn btn-dark">Filter</button>
+              <big className={styles.marginn} >Sort by:</big>{' '}
+              <button  className = {`${styles.marginn} btn btn-dark`} onClick={() => updateSortType("order/name/asc")}>Name</button>{' '}
+              <button className={`${styles.marginn} btn btn-dark`} onClick={() => updateSortType("order/name/desc")}>Name desc</button>{' '}
+              <button className={`${styles.marginn} btn btn-dark`} onClick={() => updateSortType("order/price/asc")}>Price</button>{' '}
+              <button className={`${styles.marginn} btn btn-dark`} onClick={() => updateSortType("order/price/desc")}>Price desc</button>{' '}
+              <button className={`${styles.marginn} btn btn-dark`} onClick={() => updateSortType("order/date/asc")}>Release date</button>{' '}
+              <button className={`${styles.marginn} btn btn-dark`} onClick={() => updateSortType("order/date/desc")}>Release date desc</button>
+              <input className={`${styles.marginn} ${styles.input}`} type="text" placeholder="Search Product" required id="filter" onChange={(e) => filterProducts(e)} />
               </div>
       <ProductsList
         products={loadedFilteredProducts}

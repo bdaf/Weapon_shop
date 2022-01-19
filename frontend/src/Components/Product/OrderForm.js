@@ -66,7 +66,7 @@ function OrderForm(props) {
                     <label className={styles.labels} htmlFor="country">Country:</label>
                     <input className="form-control" type="text" required id="country" ref={countryInputRef} />
                     <br></br>
-                    <button className="btn btn-dark">Add</button>
+                    <button className="btn btn-dark">Buy</button>
                 </div>
             </form>
 

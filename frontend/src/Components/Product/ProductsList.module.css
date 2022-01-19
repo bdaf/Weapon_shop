@@ -26,10 +26,15 @@
 }
 
 .input{
-    margin-right:2%;
+    margin-left:2%;
     height:35px;
+    text-align:center;
 }
 
 .filter{
     margin:2%;
+}
+
+.marginn{
+    margin:10px;
 }

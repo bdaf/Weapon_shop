@@ -10,7 +10,7 @@ function ProductCard(props) {
             <td>{props.product.amount}</td>
             <td>{props.product.category.name}</td>
             <td>{props.product.producer.companyName}</td>
-            <td><img width={200} height={200} src={props.product.photoUrl} alt="Logo" /></td>
+            <td><img width={150} height={150} src={props.product.photoUrl} alt="Logo" /></td>
             <td>
                 <button type="button" class="btn btn-outline-light">Buy</button>
             </td>

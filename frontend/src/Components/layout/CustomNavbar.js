@@ -18,9 +18,9 @@ function CustomNavbar() {
         <Link to="products" className="link-light">
           Products (OFA)
         </Link>
-        <Link to="orders" className="link-light">
-          Orders (OFA)
-        </Link>
+        {/*<Link to="orders" className="link-light">*/}
+        {/*  Orders (OFA)*/}
+        {/*</Link>*/}
         <Link to="categories" className="link-light">
           Category (OFA)
         </Link>
