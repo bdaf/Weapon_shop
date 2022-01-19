@@ -1,9 +1,10 @@
 import { Card, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function DiscountCard(props) {
-
-  const deleteCategoryHandler = async (e) => {
+  const navigate = useNavigate();
+  const deleteDiscountHandler = async (e) => {
     e.preventDefault();
     console.log("usuwamy");
     await axios.delete(`http://localhost:80/api/discounts/${props.discount.discountId}`, {
@@ -19,6 +20,10 @@ function DiscountCard(props) {
       });
   }
 
+  function navigateToDetails() {
+      navigate("" + props.discount.discountId);
+  }
+
   return (
     <Card style={{ width: "18rem" }}>
       <Card.Body>
@@ -28,8 +33,8 @@ function DiscountCard(props) {
         <Card.Text>
           Click in delete button below to ged rid of this discount!
         </Card.Text>
-        <Button variant="primary">Details</Button>{" "}
-        <Button variant="danger" type="submit" onClick={deleteCategoryHandler}>Delete</Button>{" "}
+        <Button variant="warning" onClick={navigateToDetails}>Update</Button>{" "}
+        <Button variant="danger" type="submit" onClick={deleteDiscountHandler}>Delete</Button>{" "}
       </Card.Body>
     </Card>
   );

@@ -24,4 +24,6 @@ public interface DiscountService {
     List<Discount> findAllDiscountsOrderedByToDesc();
 
     Discount updateDiscountById(Long aDiscountId, Discount aDiscount);
+
+    Discount findDiscountById(Long aDiscountId);
 }

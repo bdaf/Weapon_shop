@@ -36,6 +36,9 @@ public class DiscountController {
     @GetMapping("/order/to/desc")
     public List<Discount> getAllDiscountsOrderedByToDesc() {return discountService.findAllDiscountsOrderedByToDesc();}
 
+    @GetMapping("/{id}")
+    public Discount getDiscountById(@PathVariable("id") Long aDiscountId) {return discountService.findDiscountById(aDiscountId);}
+
     @PostMapping
     public Discount saveDiscount(@RequestBody Discount aDiscount) {
         return discountService.saveDiscountToDatabaseIfNotExists(aDiscount);

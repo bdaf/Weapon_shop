@@ -73,8 +73,13 @@ public class DiscountServiceImpl implements DiscountService {
         Discount discountToChange = discountRepository.findById(aDiscountId).get();
         Date fromDate = aDiscount.getFromDate();
         Date toDate = aDiscount.getToDate();
+        Float percent = aDiscount.getPercent();
+        // edge cases of percents
+        if (percent != null && percent > 0.99) aDiscount.setPercent(0.99F);
+        if (percent != null && percent < 0.01) aDiscount.setPercent(0.01F);
+
         // update
-        if(aDiscount.getPercent() != null) discountToChange.setPercent(aDiscount.getPercent());
+        if(percent != null) discountToChange.setPercent(percent);
         if(fromDate != null) discountToChange.setFromDate(fromDate);
         if(toDate != null) discountToChange.setToDate(toDate);
 
@@ -83,6 +88,11 @@ public class DiscountServiceImpl implements DiscountService {
             throwExceptionBecauseOfGreaterFromDateThanToDate(discountToChange.getFromDate(), discountToChange.getToDate());
 
         return discountRepository.save(discountToChange);
+    }
+
+    @Override
+    public Discount findDiscountById(Long aDiscountId) {
+        return discountRepository.findById(aDiscountId).get();
     }
 
     private Discount throwExceptionBecauseOfGreaterFromDateThanToDate(Date aFromDate, Date aToDate) {
